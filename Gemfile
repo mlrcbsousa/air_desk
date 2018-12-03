@@ -30,8 +30,8 @@ group :development, :test do
 end
 
 # Project specific gems added to the project after the minimal
-# gem 'cloudinary'
-# gem 'carrierwave'
+gem 'cloudinary', '~> 1.9.1'
+gem 'carrierwave', '~> 1.2'
 gem 'devise'
 gem 'json'
 
