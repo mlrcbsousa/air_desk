@@ -8,11 +8,11 @@ class Booking < ApplicationRecord
   has_one :review
 
   # Validations
-  validates_date :start_date, on_or_before: -> { Date.current }
-  # test validations
-  validates_date :end_date, on_or_after: -> { :start_date }
-  validates :start_date, :end_date, presence: true
   validates :price, presence: true
+  validates :start_date, :end_date, presence: true
+  # test validations
+  validates_date :start_date, on_or_after: -> { Date.current }
+  validates_date :end_date, on_or_after: -> { :start_date }
 
   private
 
