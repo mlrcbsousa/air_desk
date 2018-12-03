@@ -28,3 +28,10 @@ group :development, :test do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'dotenv-rails'
 end
+
+# Project specific gems added to the project after the minimal
+# gem 'cloudinary'
+# gem 'carrierwave'
+gem 'devise'
+gem 'json'
+
