@@ -14,7 +14,7 @@ class User < ApplicationRecord
   # Validations
   validates :username,
             uniqueness: true,
-            length: { in: 6..20 },
+            length: { in: 2..20 },
             # must be a word character (letter, number, underscore)
             format: { with: /\A(\w+)\z/ }
 
