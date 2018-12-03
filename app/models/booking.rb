@@ -10,8 +10,10 @@ class Booking < ApplicationRecord
   # Validations
   validates :start_date, :end_date, :price, presence: true
   # test validations
-  validates_date :start_date, on_or_after: -> { Date.current }
-  validates_date :end_date, on_or_after: -> { :start_date }
+  # validates_timeliness gem
+  # rails generate validates_timeliness:install
+  validates_date :start_date, on_or_after: :today
+  validates_date :end_date, on_or_after: :start_date
 
   private
 
