@@ -4,14 +4,14 @@
     <%= image_tag "logo.png", height: 50 %>
   <% end %>
 
-  <%= render 'shared/search' %>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
+    <%= render 'shared/search' %>
 
-      <% if policy(Office).create? %>
-        <%= link_to "Become a host", new_office_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <% end %>
+    <% if policy(Office).create? %>
+      <%= link_to "Become a host", new_office_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <% end %>
 
     <% if user_signed_in? %>
 
