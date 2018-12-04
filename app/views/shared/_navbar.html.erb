@@ -9,6 +9,10 @@
 
     <% if user_signed_in? %>
 
+      <% if policy(Office).create? %>
+        <%= link_to "New office", new_office_path, class: "btn btn-default" %>
+      <% end %>
+
       <!-- Links when logged in -->
       <%= link_to "User", "#", class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Offices", "#", class: "navbar-wagon-item navbar-wagon-link" %>

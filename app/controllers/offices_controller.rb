@@ -4,22 +4,22 @@ class OfficesController < ApplicationController
 
   def index
     # Todo
-    @offices = Office.all
     # '/offices' url
     # offices_path helper
+    @offices = policy_scope(Office).order(created_at: :desc)
   end
 
   def new
-    # Todo
     @office = Office.new
-    # needs pundit here, only user can do this
+    authorize @office
   end
 
   def create
     # Todo
-    # check what comes from params
-    user = current_user
-    @office = user.office.new(params_office)
+    @office = Office.new(params_office)
+
+    # user = current_user
+    authorize @office
     if @office.save
       redirect_to office_path(@office)
     else
@@ -28,30 +28,27 @@ class OfficesController < ApplicationController
   end
 
   def show
-    # @office = Office.find(params[:id])
-    @booking = Booking.new # to generate the simple form
+    authorize @office
+    # @booking = Booking.new # to generate the simple form
     # Todo
   end
 
   def edit
-    # @office = Office.find(params[:id])
     # Todo
     # needs pundit here, only user can do this
   end
 
   def update
     # Todo
-    user = current_user
     @office = user.office.update(params_office)
     if @office.save
       redirect_to office_path(@office)
     else
-      render :new
+      render :edit
     end
   end
 
   def destroy
-    # @office = Office.find(params[:id])
     # Todo
     # needs pundit here
     @office.destroy
@@ -61,6 +58,7 @@ class OfficesController < ApplicationController
 
   def params_office
     # todo
+    params.require(:office).permit(:name, :location, :description, :capacity, :dayrate)
   end
 
   def set_office
