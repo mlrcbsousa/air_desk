@@ -22,6 +22,8 @@ class Office < ApplicationRecord
 
     ratings = []
     bookings.each { |booking| ratings << booking.review.rating if booking.review }
-    ratings.sum / ratings.count if ratings.count.positive?
+    return 0 unless ratings.count.positive?
+
+    ratings.sum / ratings.count
   end
 end
