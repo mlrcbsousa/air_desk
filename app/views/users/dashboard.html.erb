@@ -1,9 +1,18 @@
-dashboard.html.erb
+<div class="container">
+  <div class="row">
+    <h3>My bookings</h3>
+    <%= render @bookings %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h3>Offices I am hosting</h3>
+    <%= render @offices %>
+  </div>
+</div>
 
 
-<% if policy(@user).dashboard? %>
-  if policy(@user).dashboard? passed
-<% end %>
 display the information inside the current_user
 
 including list of bookings and possible offices that he is hosting
