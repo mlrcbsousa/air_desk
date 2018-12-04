@@ -1,6 +1,9 @@
 dashboard.html.erb
 
 
+<% if policy(@user).dashboard? %>
+  if policy(@user).dashboard? passed
+<% end %>
 display the information inside the current_user
 
 including list of bookings and possible offices that he is hosting

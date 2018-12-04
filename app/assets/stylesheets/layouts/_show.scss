@@ -1,0 +1,28 @@
+.office {
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+  margin-top: 1px;
+}
+.margin-top-negative {
+    margin-top: -75px;
+}
+.office-show-card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  border-radius: 3px;
+  h1, h3 {
+    margin-top: 5px;
+    color: $blue;
+  }
+  p {
+    margin-top: 0;
+  }
+}
+.flex-align-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

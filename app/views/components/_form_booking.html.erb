@@ -1,0 +1,8 @@
+<!-- views/components/_form_booking.html.erb -->
+<%= simple_form_for [office, booking] do |f| %>
+
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :price %>
+  <%= f.submit 'Book Now', class: 'btn btn-default' %>
+<% end %>
