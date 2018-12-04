@@ -1,22 +1,23 @@
 <div class="navbar-wagon">
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+  <%= link_to offices_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "logo.png", height: 50 %>
   <% end %>
+
+  <%= render 'shared/search' %>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
 
-    <% if user_signed_in? %>
-
       <% if policy(Office).create? %>
-        <%= link_to "New office", new_office_path, class: "btn btn-default" %>
+        <%= link_to "Become a host", new_office_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% end %>
 
+    <% if user_signed_in? %>
+
       <!-- Links when logged in -->
-      <%= link_to "User", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Offices", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Messages", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Dashboard", "/dashboard", class: "navbar-wagon-item navbar-wagon-link" %>
+
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">

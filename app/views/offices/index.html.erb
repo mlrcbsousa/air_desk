@@ -2,6 +2,9 @@
 <div class="container">
   <div class="index-title">
     <h1 class="text-primary">All our offices</h1>
+    <% if @query %>
+      <p>You searched for <em class="text-primary">"<%= @query %>"</em>.. We found <strong class="text-primary"><%= @offices.count %></strong> offices out of <strong><%= @total %></strong> on our website.</p>
+    <% end %>
   </div>
   <div class="row">
     <%= render @offices %>

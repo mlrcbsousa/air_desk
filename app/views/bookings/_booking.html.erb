@@ -1,0 +1,7 @@
+<!-- views/bookings/_booking.html.erb -->
+<div class="booking">
+    <span><%= booking.updated_at.strftime("on %a, %-d %b %Y at %-I:%M%P") %></span>
+    <p><%= booking.start_date %></p>
+    <p><%= booking.end_date %></p>
+    <p><%= booking.price %></p>
+</div>

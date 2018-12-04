@@ -6,7 +6,10 @@ class OfficesController < ApplicationController
     # Todo
     # '/offices' url
     # offices_path helper
-    @offices = policy_scope(Office).order(created_at: :desc)
+    @total = Office.count
+    @query = params[:query]
+    offices = @query ? Office.where("name LIKE '%#{@query}%'") : Office.all
+    @offices = policy_scope(offices).order(created_at: :desc)
   end
 
   def new
