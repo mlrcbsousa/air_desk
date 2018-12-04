@@ -33,6 +33,7 @@ class OfficesController < ApplicationController
   def show
     authorize @office
     @booking = Booking.new # to generate the simple form
+
     # Todo
   end
 
