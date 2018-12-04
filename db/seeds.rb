@@ -23,7 +23,8 @@ user = User.new(
   last_name: "Sisserian",
   username: "cs",
   email: "cs@airdnc.com",
-  password: "password"
+  password: "password",
+  remote_avatar_url: 'https://kitt.lewagon.com/placeholder/users/sisserian'
 )
 user.save!
 
@@ -32,7 +33,8 @@ user = User.new(
   last_name: "Sousa",
   username: "ms",
   email: "ms@airdnc.com",
-  password: "password"
+  password: "password",
+  remote_avatar_url: 'https://kitt.lewagon.com/placeholder/users/mlrcbsousa'
 )
 user.save!
 
@@ -41,7 +43,8 @@ user = User.new(
   last_name: "Welter",
   username: "aw",
   email: "aw@airdnc.com",
-  password: "password"
+  password: "password",
+  remote_avatar_url: 'https://kitt.lewagon.com/placeholder/users/welan125'
 )
 user.save!
 
@@ -50,7 +53,8 @@ user = User.new(
   last_name: "De Briey",
   username: "tb",
   email: "tb@airdnc.com",
-  password: "password"
+  password: "password",
+  remote_avatar_url: 'https://kitt.lewagon.com/placeholder/users/Bitais'
 )
 user.save!
 
