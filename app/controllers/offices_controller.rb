@@ -5,15 +5,26 @@ class OfficesController < ApplicationController
   def index
     # Todo
     @offices = Office.all
+    # '/offices' url
+    # offices_path helper
   end
 
   def new
     # Todo
     @office = Office.new
+    # needs pundit here, only user can do this
   end
 
   def create
     # Todo
+    # check what comes from params
+    user = current_user
+    @office = user.office.new(params_office)
+    if @office.save
+      redirect_to office_path(@office)
+    else
+      render :new
+    end
   end
 
   def show
@@ -25,15 +36,25 @@ class OfficesController < ApplicationController
   def edit
     # @office = Office.find(params[:id])
     # Todo
+    # needs pundit here, only user can do this
   end
 
   def update
     # Todo
+    user = current_user
+    @office = user.office.update(params_office)
+    if @office.save
+      redirect_to office_path(@office)
+    else
+      render :new
+    end
   end
 
   def destroy
     # @office = Office.find(params[:id])
     # Todo
+    # needs pundit here
+    @office.destroy
   end
 
   private

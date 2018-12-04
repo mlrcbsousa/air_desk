@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
     # a sellection of offices maybe, by top rated, gotta think about this
     # same as this @offices = Office.all.sort_by { |office| office.avg_rating }.reverse[0..10]
-    @offices = Office.all.sort_by(&:avg_rating).reverse[0..10]
+    @offices = Office.all.sort_by(&:avg_rating).reverse[0..8]
   end
 
   def about
