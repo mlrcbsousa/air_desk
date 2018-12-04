@@ -1,2 +1,13 @@
-index.html.erb
-display stuff inside @offices
+<!-- app/views/offices/index.html.erb -->
+<div class="container">
+
+  <div class="index-title">
+    <h1 class="text-primary">All our offices</h1>
+
+  </div>
+  <div class="row">
+
+    <%= render @offices %>
+
+  </div>
+</div>
