@@ -18,12 +18,15 @@ User.destroy_all
 
 #--- Generating Users
 
+image_path = "app/assets/images/"
+
 user = User.new(
   first_name: "Chris",
   last_name: "Sisserian",
   username: "cs",
   email: "cs@airdnc.com",
-  password: "password"
+  password: "password",
+  avatar: "#{image_path}chris.jpg"
 )
 user.save!
 
@@ -33,6 +36,7 @@ user = User.new(
   username: "ms",
   email: "ms@airdnc.com",
   password: "password"
+  avatar: "#{image_path}manuel.jpg"
 )
 user.save!
 
@@ -42,6 +46,7 @@ user = User.new(
   username: "aw",
   email: "aw@airdnc.com",
   password: "password"
+  avatar: "#{image_path}antoine.jpg"
 )
 user.save!
 
@@ -51,6 +56,7 @@ user = User.new(
   username: "tb",
   email: "tb@airdnc.com",
   password: "password"
+  avatar: "#{image_path}thibaut.jpg"
 )
 user.save!
 
