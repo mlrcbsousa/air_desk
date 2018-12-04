@@ -54,15 +54,15 @@ user = User.new(
 )
 user.save!
 
-# # For when we need uers that dont host offices
-# 20.times do
-#   user = User.new(
-#     email: Faker::Internet.email,
-#     password: 'password'
-#   )
-#   user.remote_avatar_url = Faker::Avatar.image
-#   user.save
-# end
+# For when we need uers that dont host offices
+20.times do
+  user = User.new(
+    email: Faker::Internet.email,
+    password: 'password'
+  )
+  # user.remote_avatar_url = Faker::Avatar.image
+  user.save!
+end
 
 puts "Generated #{User.count} users in the database!"
 
@@ -82,8 +82,7 @@ descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
     capacity: rand(2..20),
     dayrate: rand(20..200),
     # after we add the random users, if we want to keep the hosts as just us 4 we can change this line to
-    # user: User.find_by(username: %w[ms aw tb cs].sample)
-    user: User.all.sample
+    user: User.find_by(username: %w[ms aw tb cs].sample)
   )
   office.save!
 end

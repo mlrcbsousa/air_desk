@@ -4,6 +4,9 @@ class BookingsController < ApplicationController
     booking = office.bookings.new(params_booking)
     booking.user = current_user
     authorize booking
+    # TO DO JS price validation (front-end)
+    # render 'offices/show' if booking.price != booking.set_price
+
     if booking.save
       redirect_to dashboard_path
     else
