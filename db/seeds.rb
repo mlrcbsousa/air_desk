@@ -91,7 +91,7 @@ puts "Generated #{Office.count} users in the database!"
 
 #--- Generating Bookings
 
-50.times do
+40.times do
   Booking.create(
     start_date: Date.new(2019,rand(1..6),rand(1..28)),
     end_date: Date.new(2019,rand(7..12),rand(1..30)),
@@ -104,7 +104,7 @@ puts "Generated #{Booking.count} bookings in the database!"
 
 #--- Generating Reviews
 
-Booking.all.each do |booking|
+Booking.limit(30).each do |booking|
   booking.review = Review.new(
     rating: rand(0..5),
     content: Faker::ChuckNorris.fact

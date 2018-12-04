@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+  get 'dashboard', to: 'users#dashboard'
 
-  resources :offices, only: %i[index new create show] do
+  resources :offices do
     resources :bookings, only: :create do
       resources :reviews, only: :create
     end

@@ -16,4 +16,12 @@ class Office < ApplicationRecord
   validates :name, length: { in: 10..140 }
   # must be a-z or ' ' (case-insensitive)
   validates :name, :location, allow_blank: false, format: { with: /\A([a-z ]+)\z/i }
+
+  def avg_rating
+    return 0 unless bookings.count.positive?
+
+    ratings = []
+    bookings.each { |booking| ratings << booking.review.rating if booking.review }
+    ratings.sum / ratings.count if ratings.count.positive?
+  end
 end
