@@ -1,5 +1,8 @@
 import "bootstrap";
 import { initDatepickers } from '../components/datepicker';
-import { setPrice } from '../components/setprice';
 
-initDatepickers();
+const dayRate = document.getElementById("dayrate");
+if (dayRate) {
+  initDatepickers();
+};
+
