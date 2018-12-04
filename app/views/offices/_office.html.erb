@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- cl_image_tag(office.user.avatar) -->
-    <img class="card-user" src="https://kitt.lewagon.com/placeholder/users/mlrcbsousa">
+    <%= image_tag office.user.avatar.url, class: "card-user" %>
     <%= link_to '', office_path(office), class: 'card-link' %>
   </div>
 </div>
