@@ -1,9 +1,11 @@
 <!-- views/offices/_office.html.erb -->
 <div class="col-xs-12 col-sm-4">
   <div class="card">
-    <div class="card-category"><%= office.name %></div>
+    <div class="card-category">
+      <%= office.name %>
+    </div>
     <div class="card-description">
-      <h2><%= office.dayrate %> €</h2>
+      <h3><%= office.dayrate %> €</h3>
       <p>
         <%= office.location %> |
         <%= office.capacity %> <i class="fas fa-user-friends"></i>
