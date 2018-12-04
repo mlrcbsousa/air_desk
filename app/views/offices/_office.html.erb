@@ -1,12 +1,25 @@
 <!-- views/offices/_office.html.erb -->
 <div class="col-xs-12 col-sm-4">
   <div class="card">
+    <div class="card-category"><%= office.name %></div>
     <div class="card-description">
-      <h2><%= office.name %></h2>
-      <p><%= office.location %></p>
-      <p><%= office.capacity %></p>
-      <p><%= office.dayrate %></p>
+      <h2><%= office.dayrate %> €</h2>
+      <p>
+        <%= office.location %> |
+        <%= office.capacity %> <i class="fas fa-user-friends"></i>
+      </p>
+
+      <div class="review-rating">
+        <% office.avg_rating.times do %>
+          <i class="fas fa-coffee active"></i>
+        <% end %>
+        <% (5 - office.avg_rating).times do %>
+          <i class="fas fa-coffee inactive"></i>
+        <% end %>
+      </div>
     </div>
+    <!-- cl_image_tag(office.user.avatar) -->
+    <img class="card-user" src="https://kitt.lewagon.com/placeholder/users/mlrcbsousa">
     <%= link_to '', office_path(office), class: 'card-link' %>
   </div>
 </div>
