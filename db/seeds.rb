@@ -64,7 +64,7 @@ user.save!
     email: Faker::Internet.email,
     password: 'password'
   )
-  # user.remote_avatar_url = Faker::Avatar.image
+  user.remote_avatar_url = "https://robohash.org/#{(1..10).map {('a'..'z').to_a[rand(26)]}.join}.png"
   user.save!
 end
 
