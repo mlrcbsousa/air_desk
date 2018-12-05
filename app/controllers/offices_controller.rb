@@ -19,10 +19,16 @@ class OfficesController < ApplicationController
   def create
     @office = Office.new(params_office)
     authorize @office
-    if @office.save
-      redirect_to office_path(@office)
-    else
-      render :new
+
+    respond_to do |format|
+      if @office.save
+        params[:office_attachments]['attachment'].each do |a|
+          @office_attachment = @office.office_attachments.create!(attachment: a)
+        end
+        format.html { redirect_to @office, notice: 'office was successfully created.' }
+      else
+        format.html { render action: 'new' }
+      end
     end
   end
 
@@ -32,6 +38,7 @@ class OfficesController < ApplicationController
     # this is some sexy shit right here, no jokes, but not needed lol
     # @reviews = @office.bookings.select(&:review).map!(&:review)
     @reviews = @office.reviews
+    @office_attachments = @office.office_attachments.all
   end
 
   def edit
@@ -56,7 +63,14 @@ class OfficesController < ApplicationController
   private
 
   def params_office
-    params.require(:office).permit(:name, :location, :description, :capacity, :dayrate)
+    params.require(:office).permit(
+      :name,
+      :location,
+      :description,
+      :capacity,
+      :dayrate,
+      office_attachments_attributes: %i[id office_id attachment]
+    )
   end
 
   def set_office

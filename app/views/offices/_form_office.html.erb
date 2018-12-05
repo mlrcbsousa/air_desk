@@ -1,10 +1,13 @@
 <div class="mt-3">
-  <%= simple_form_for(office) do |f| %>
+  <%= simple_form_for(office), html: { multipart: true } do |f| %>
     <%= f.input :name %>
     <%= f.input :location %>
     <%= f.input :description %>
     <%= f.input :capacity %>
     <%= f.input :dayrate %>
+    <%= f.simple_fields_for :office_attachments do |p| %>
+      <%= p.input :attachment, as: :file, multiple: true, name: "office_attachments[avatar][]" %>
+    <% end %>
     <%= f.submit class: 'btn btn-primary' %>
   <% end %>
 </div>

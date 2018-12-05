@@ -54,5 +54,15 @@
         <%= render 'bookings/form_booking', office: @office, booking: @booking %>
       </div>
     </div>
+    <div class="col-xs-12 col-sm-4">
+      <div class="office-show-card">
+        <p id="notice"><%= notice %></p>
+        <h3>Add attachment:</h3>
+        <% @office_attachments.each do |p| %>
+          <%= image_tag p.attachment_url %>
+          <%= link_to "Edit Attachment", edit_office_attachment_path(p) %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

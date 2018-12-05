@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :bookings, only: :create do
       resources :reviews, only: %i[new create]
     end
+    resources :office_attachments, only: %i[create edit update destroy]
   end
 
   root to: 'pages#home'
