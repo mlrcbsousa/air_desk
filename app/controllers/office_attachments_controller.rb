@@ -1,6 +1,7 @@
 class OfficeAttachmentsController < ApplicationController
   def edit
     @office_attachment = OfficeAttachment.find(params[:id])
+    authorize @office_attachment.office
   end
 
   def update

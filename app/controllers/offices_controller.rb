@@ -24,9 +24,7 @@ class OfficesController < ApplicationController
 
     respond_to do |format|
       if @office.save
-        # params[:office][:office_attachments_attributes][:'0'][:attachment]
         params[:office_attachments]['attachment'].each do |a|
-        # params[:office_attachments]['attachment'].each do |a|
           @office_attachment = @office.office_attachments.create!(attachment: a)
         end
         format.html { redirect_to @office, notice: 'office was successfully created.' }
@@ -38,9 +36,7 @@ class OfficesController < ApplicationController
 
   def show
     authorize @office
-    @booking = Booking.new # to generate the simple form
-    # this is some sexy shit right here, no jokes, but not needed lol
-    # @reviews = @office.bookings.select(&:review).map!(&:review)
+    @booking = Booking.new
     @reviews = @office.reviews
     @office_attachments = @office.office_attachments.all
   end
