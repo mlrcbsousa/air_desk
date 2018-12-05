@@ -1,0 +1,6 @@
+<!-- _form_office_attachment.html.erb -->
+<%= image_tag @office_attachment.attachment %>
+<%= simple_form_for(@office_attachment) do |f| %>
+  <%= f.input :attachment, as: :file %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
