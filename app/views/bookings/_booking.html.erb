@@ -10,7 +10,7 @@
       End date: <%= booking.end_date.strftime("To: %a, %-d %b %Y") %>
     </p>
     <% if booking.review %>
-      <%= render review %>
+      <%= render 'reviews/review' %>
     <% elsif %>
       <%= link_to new_office_booking_review do %>
         <i class="fas fa-thumbs-up"></i>
