@@ -13,16 +13,20 @@ class OfficesController < ApplicationController
 
   def new
     @office = Office.new
+    @office_attachment = @office.office_attachments.build
     authorize @office
   end
 
   def create
     @office = Office.new(params_office)
+    @office.user = current_user
     authorize @office
 
     respond_to do |format|
       if @office.save
+        # params[:office][:office_attachments_attributes][:'0'][:attachment]
         params[:office_attachments]['attachment'].each do |a|
+        # params[:office_attachments]['attachment'].each do |a|
           @office_attachment = @office.office_attachments.create!(attachment: a)
         end
         format.html { redirect_to @office, notice: 'office was successfully created.' }
@@ -69,7 +73,7 @@ class OfficesController < ApplicationController
       :description,
       :capacity,
       :dayrate,
-      office_attachments_attributes: %i[id office_id attachment]
+      office_attachments_attributes: [:id, :office_id, :attachment]
     )
   end
 

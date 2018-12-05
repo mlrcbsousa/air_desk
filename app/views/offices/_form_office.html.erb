@@ -6,7 +6,7 @@
     <%= f.input :capacity %>
     <%= f.input :dayrate %>
     <%= f.simple_fields_for :office_attachments do |p| %>
-      <%= p.input :attachment, as: :file, multiple: true, name: "office_attachments[avatar][]" %>
+      <%= p.input :attachment, as: :file, multiple: true, name: "office_attachments[attachment][]" %>
     <% end %>
     <%= f.submit class: 'btn btn-primary' %>
   <% end %>

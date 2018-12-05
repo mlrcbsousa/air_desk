@@ -60,7 +60,7 @@
         <h3>Add attachment:</h3>
         <% @office_attachments.each do |p| %>
           <%= image_tag p.attachment_url %>
-          <%= link_to "Edit Attachment", edit_office_attachment_path(p) %>
+          <%= link_to "Edit Attachment", edit_office_office_attachment_path(@office,p) %>
         <% end %>
       </div>
     </div>
