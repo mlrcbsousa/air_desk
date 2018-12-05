@@ -4,30 +4,27 @@
   <div class="row">
     <div class="col-xs-12 col-sm-8">
       <div class="office-show-card">
-        <h1>
+        <h2>
           <%= @office.name %>
-
           <% if policy(@office).edit? %>
             <%= link_to edit_office_path(@office) do %>
               <i class="fas fa-marker"></i>
             <% end %>
           <% end %>
-
           <% if policy(@office).destroy? %>
             <%= link_to office_path(@office),
                         method: :delete,
                         data: { confirm: "Are you sure?" } do %>
-                          <i class="far fa-trash-alt"></i>
-                        <% end %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
           <% end %>
-        </h1>
+        </h2>
       </div>
       <div class="office-show-card">
         <h3>Details:</h3>
         <%= image_tag @office.user.avatar.url, width: 80, class: "img-circle" %>
         <p id="dayrate"><%= @office.dayrate %> € /day</p>
         <p><%= @office.location %> - <%= @office.capacity %> <i class="fas fa-user-friends"></i></p>
-
         <p>
           Average rating:
           <% if @office.avg_rating == 0 %>
@@ -36,7 +33,6 @@
             <%= render 'shared/rating', office: @office %>
           <% end %>
         </p>
-
         <p><%= @office.description %></p>
       </div>
       <div class="office-show-card">
