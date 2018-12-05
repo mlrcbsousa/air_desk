@@ -29,8 +29,9 @@ class OfficesController < ApplicationController
   def show
     authorize @office
     @booking = Booking.new # to generate the simple form
-    # this is some sexy shit right here, no jokes
-    @reviews = @office.bookings.select(&:review).map!(&:review)
+    # this is some sexy shit right here, no jokes, but not needed lol
+    # @reviews = @office.bookings.select(&:review).map!(&:review)
+    @reviews = @office.reviews
   end
 
   def edit

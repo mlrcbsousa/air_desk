@@ -1,24 +1,23 @@
 <!-- views/bookings/_booking.html.erb -->
 <li>
   <div class="booking">
-    <span><%= booking.updated_at.strftime("on %a, %-d %b %Y at %-I:%M%P") %></span>
-    <span>Where: <%= booking.office.location %></span>
+    <span>Your next work trip to <strong><%= booking.office.location %></strong></span>
+    <p>
+      Last updated: <strong><%= booking.updated_at.strftime("on %a, %-d %b %Y at %-I:%M%P") %></strong>
+    </p>
     <span>Host:</span>
     <%= cl_image_tag booking.office.user.avatar.url, width: 50, class: "img-circle" %>
-    <p>
-      Start date: <%= booking.start_date.strftime("From: %a, %-d %b %Y") %> |
-      End date: <%= booking.end_date.strftime("To: %a, %-d %b %Y") %>
-    </p>
+    <p>From: <strong><%= booking.start_date.strftime("%a, %-d %b %Y") %></strong></p>
+    <p>To: <strong><%= booking.end_date.strftime("%a, %-d %b %Y") %></strong></p>
     <% if booking.review %>
-      <%= render 'reviews/review' %>
+      <span>Review:</span>
+      <%= render 'reviews/review', review: booking.review %>
     <% elsif %>
-      <%= link_to new_office_booking_review do %>
+      <%= link_to new_office_booking_review_path do %>
         <i class="fas fa-thumbs-up"></i>
       <% end %>
     <% end %>
-    <%= link_to new_office_booking_review do %>
-      <i class="fas fa-thumbs-up"></i>
-    <% end %>
-    <strong><%= booking.price %></strong>
+
+    <strong><%= booking.price %> €</strong>
   </div>
 </li>
