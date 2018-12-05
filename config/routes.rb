@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :offices do
     resources :bookings, only: :create do
-      resources :reviews, only: :create
+      resources :reviews, only: %i[new create]
     end
   end
 

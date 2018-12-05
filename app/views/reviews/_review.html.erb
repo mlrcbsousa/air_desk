@@ -3,10 +3,10 @@
   <div class="review">
     <div class="review-rating">
       <% review.rating.times do %>
-        <i class="fas fa-fire active"></i>
+        <i class="fas fa-coffee active"></i>
       <% end %>
       <% (5 - review.rating).times do %>
-        <i class="fas fa-fire inactive"></i>
+        <i class="fas fa-coffee inactive"></i>
       <% end %>
     </div>
     <span><%= review.created_at.strftime("on %a, %-d %b %Y at %-I:%M%P") %></span>

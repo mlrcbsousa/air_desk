@@ -2,7 +2,23 @@
 <div class="col-xs-12 col-sm-4">
   <div class="card">
     <div class="card-category">
-      <p><%= office.name %></p>
+      <p>
+        <%= office.name %>
+        <!-- Make these links accessible, currently whole card will refirect to show -->
+        <% if policy(office).edit? %>
+          <%= link_to edit_office_path(office) do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+        <% end %>
+
+        <% if policy(office).destroy? %>
+          <%= link_to office_path(office),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } do %>
+                        <i class="far fa-trash-alt"></i>
+                      <% end %>
+        <% end %>
+      </p>
       <% unless office.avg_rating == 0 %>
         <%= render 'shared/rating', office: office %>
       <% end %>

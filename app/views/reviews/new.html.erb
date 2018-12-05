@@ -1,0 +1,6 @@
+<!-- views/reviews/_form_review.html.erb -->
+<%= simple_form_for [booking, review] do |f| %>
+  <%= f.input :content, label: 'Review' %>
+  <%= f.input :rating, collection: 0..5 %>
+  <%= f.submit 'Add', class: "btn btn-default" %>
+<% end %>
