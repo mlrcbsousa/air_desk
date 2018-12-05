@@ -3,6 +3,24 @@
   <div class="card">
     <div class="card-pictures">
       <h4><%= office.name %></h4>
+      <div class="card-edits">
+        <!-- Make these links accessible, currently whole card will refirect to show -->
+        <p>
+          <% if policy(office).edit? %>
+          <%= link_to edit_office_path(office) do %>
+            <i class="fas fa-pencil-alt"></i>
+            <% end %>
+          <% end %>
+
+          <% if policy(office).destroy? %>
+            <%= link_to office_path(office),
+            method: :delete,
+            data: { confirm: "Are you sure?" } do %>
+            <i class="far fa-trash-alt"></i>
+            <% end %>
+          <% end %>
+        </p>
+      </div>
     </div>
 
     <div class="card-description">
@@ -11,21 +29,7 @@
         <p><%= office.location %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
       </div>
       <div class="card-cup-ratings">
-        <!-- Make these links accessible, currently whole card will refirect to show -->
-        <p><% if policy(office).edit? %>
-          <%= link_to edit_office_path(office) do %>
-          <i class="fas fa-pencil-alt"></i>
-          <% end %>
-          <% end %>
 
-          <% if policy(office).destroy? %>
-          <%= link_to office_path(office),
-          method: :delete,
-          data: { confirm: "Are you sure?" } do %>
-          <i class="far fa-trash-alt"></i>
-          <% end %>
-          <% end %>
-        </p>
         <% unless office.avg_rating == 0 %>
         <%= render 'shared/rating', office: office %>
         <% end %>
