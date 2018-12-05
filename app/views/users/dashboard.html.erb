@@ -1,37 +1,22 @@
 <!-- dashboard.html.erb -->
 
 <!-- TODO edit_booking if start-date allows -->
+<div class="dashboard-container">
+  <div class="my-dashboard text-center">
+    <h1>My Dashboard</h1>
+  </div>
 
-<div class="container padding-top-30">
-  <div class="row">
-
-    <div class="col-xs-12 col-sm-4">
-      <div class="office-show-card">
-        <%= image_tag @user.avatar.url, width: 150, class: "img-circle" %>
-        <h3><%= @user.email %></h3>
-      </div>
+  <div class="my-bookings">
+    <h3 class='sub-title'>My bookings</h3>
+    <div class="row">
+      <%= render @bookings %>
     </div>
+  </div>
 
-    <div class="col-xs-12 col-sm-8">
-
-      <div class="office-show-card">
-        <h1>My Dashboard:</h1>
-      </div>
-
-      <div class="office-show-card">
-        <h3>My bookings</h3>
-        <ul class="list-unstyled">
-          <%= render @bookings %>
-        </ul>
-      </div>
-
-      <div class="office-show-card">
-        <h3>Offices I am hosting</h3>
-        <div class="row">
-          <%= render @offices %>
-        </div>
-      </div>
-
+  <div class="my-offices">
+    <h3 class='sub-title'>My offices</h3>
+    <div class="row">
+        <%= render @offices %>
     </div>
   </div>
 </div>
