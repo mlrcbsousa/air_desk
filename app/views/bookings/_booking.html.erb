@@ -1,7 +1,24 @@
 <!-- views/bookings/_booking.html.erb -->
-<div class="booking">
+<li>
+  <div class="booking">
     <span><%= booking.updated_at.strftime("on %a, %-d %b %Y at %-I:%M%P") %></span>
-    <p><%= booking.start_date %></p>
-    <p><%= booking.end_date %></p>
-    <p><%= booking.price %></p>
-</div>
+    <span>Where: <%= booking.office.location %></span>
+    <span>Host:</span>
+    <%= cl_image_tag booking.office.user.avatar.url, width: 50, class: "img-circle" %>
+    <p>
+      Start date: <%= booking.start_date.strftime("From: %a, %-d %b %Y") %> |
+      End date: <%= booking.end_date.strftime("To: %a, %-d %b %Y") %>
+    </p>
+    <% if booking.review %>
+      <%= render 'reviews/review' %>
+    <% elsif %>
+      <%= link_to new_office_booking_review do %>
+        <i class="fas fa-thumbs-up"></i>
+      <% end %>
+    <% end %>
+    <%= link_to new_office_booking_review do %>
+      <i class="fas fa-thumbs-up"></i>
+    <% end %>
+    <strong><%= booking.price %></strong>
+  </div>
+</li>
