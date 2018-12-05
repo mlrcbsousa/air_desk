@@ -3,22 +3,15 @@
   <%= link_to offices_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "airdnc-black.png", height: 70 %>
   <% end %>
-
-
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
     <%= render 'shared/search' %>
-
     <% if policy(Office).create? %>
       <%= link_to "Become a host", new_office_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
-
     <% if user_signed_in? %>
-
       <!-- Links when logged in -->
       <%= link_to "Dashboard", "/dashboard", class: "navbar-wagon-item navbar-wagon-link" %>
-
-
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
@@ -33,7 +26,7 @@
               <% end %>
             </li>
             <li>
-              <%= link_to "#" do %>
+              <%= link_to edit_user_password_path do %>
                 <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
               <% end %>
             </li>
@@ -50,7 +43,6 @@
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
   </div>
-
   <!-- Dropdown list appearing on mobile only -->
   <div class="navbar-wagon-item hidden-md hidden-lg">
     <div class="dropdown">
@@ -63,4 +55,3 @@
     </div>
   </div>
 </div>
-
