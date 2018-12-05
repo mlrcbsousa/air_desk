@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   # Associations
   has_many :bookings
-  has_many :offices, through: :bookings
+  has_many :offices
 
   # Validations
   validates :username,

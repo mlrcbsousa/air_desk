@@ -2,6 +2,8 @@ class OfficesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_office, only: %i[show edit update destroy]
 
+  # layout 'map', only: :index
+
   def index
     @total = Office.count
     @query = params[:query]
@@ -27,8 +29,9 @@ class OfficesController < ApplicationController
   def show
     authorize @office
     @booking = Booking.new # to generate the simple form
-    # this is some sexy shit right here, no jokes
-    @reviews = @office.bookings.select(&:review).map!(&:review)
+    # this is some sexy shit right here, no jokes, but not needed lol
+    # @reviews = @office.bookings.select(&:review).map!(&:review)
+    @reviews = @office.reviews
   end
 
   def edit
