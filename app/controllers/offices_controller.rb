@@ -1,11 +1,8 @@
 class OfficesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
-  before_action :set_office, only: %i[show edit destroy]
+  before_action :set_office, only: %i[show edit update destroy]
 
   def index
-    # Todo
-    # '/offices' url
-    # offices_path helper
     @total = Office.count
     @query = params[:query]
     offices = @query ? Office.where("name LIKE '%#{@query}%'") : Office.all
@@ -18,10 +15,7 @@ class OfficesController < ApplicationController
   end
 
   def create
-    # Todo
     @office = Office.new(params_office)
-
-    # user = current_user
     authorize @office
     if @office.save
       redirect_to office_path(@office)
@@ -33,18 +27,16 @@ class OfficesController < ApplicationController
   def show
     authorize @office
     @booking = Booking.new # to generate the simple form
-
-    # Todo
+    # this is some sexy shit right here, no jokes
+    @reviews = @office.bookings.select(&:review).map!(&:review)
   end
 
   def edit
-    # Todo
-    # needs pundit here, only user can do this
+    authorize @office
   end
 
   def update
-    # Todo
-    @office = user.office.update(params_office)
+    @office.update(params_office)
     if @office.save
       redirect_to office_path(@office)
     else
@@ -53,15 +45,14 @@ class OfficesController < ApplicationController
   end
 
   def destroy
-    # Todo
-    # needs pundit here
+    authorize @office
     @office.destroy
+    redirect_to dashboard_path
   end
 
   private
 
   def params_office
-    # todo
     params.require(:office).permit(:name, :location, :description, :capacity, :dayrate)
   end
 

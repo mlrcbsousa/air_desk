@@ -13,3 +13,10 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+.min-height {
+  min-height: calc(100vh - 170px);
+}
+.padding-top-50 {
+  padding-top: 50px;
+}
