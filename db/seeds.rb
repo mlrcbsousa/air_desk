@@ -90,7 +90,7 @@ descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
   )
   office.save!
 end
-puts "Generated #{Office.count} users in the database!"
+puts "Generated #{Office.count} offices in the database!"
 
 #--- Generating Bookings
 
