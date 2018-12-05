@@ -14,7 +14,7 @@
       <span>Review:</span>
       <%= render 'reviews/review', review: booking.review %>
     <% elsif %>
-      <%= link_to new_office_booking_review_path do %>
+      <%= link_to new_office_booking_review_path(booking.office, booking) do %>
         <i class="fas fa-thumbs-up"></i>
       <% end %>
     <% end %>
