@@ -4,34 +4,54 @@
   <div class="row">
     <div class="col-xs-12 col-sm-8">
       <div class="office-show-card">
-        <h1><%= @office.name %></h1>
+        <h1>
+          <%= @office.name %>
+
+          <% if policy(@office).edit? %>
+            <%= link_to edit_office_path(@office) do %>
+              <i class="fas fa-marker"></i>
+            <% end %>
+          <% end %>
+
+          <% if policy(@office).destroy? %>
+            <%= link_to office_path(@office),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" } do %>
+                          <i class="far fa-trash-alt"></i>
+                        <% end %>
+          <% end %>
+        </h1>
       </div>
       <div class="office-show-card">
         <h3>Details:</h3>
-        <p id="dayrate"><%= @office.dayrate %></p>
-        <p><%= @office.capacity %></p>
-        <p><%= @office.location %></p>
+        <%= image_tag @office.user.avatar.url, width: 80, class: "img-circle" %>
+        <p id="dayrate"><%= @office.dayrate %> € /day</p>
+        <p><%= @office.location %> - <%= @office.capacity %> <i class="fas fa-user-friends"></i></p>
+
+        <p>
+          Average rating:
+          <% if @office.avg_rating == 0 %>
+            <span class="no-rating">This office hasn't been rated yet!</span>
+          <% elsif %>
+            <%= render 'shared/rating', office: @office %>
+          <% end %>
+        </p>
+
         <p><%= @office.description %></p>
       </div>
       <div class="office-show-card">
         <h3>Reviews:</h3>
         <div>
           <ul class="list-unstyled">
-            <% @office.bookings.each do |booking| %>
-              <li>
-                <% if booking.review %>
-                  <%= render 'components/review', review: booking.review %>
-                <% end %>
-              </li>
-            <% end %>
+            <%= render @reviews %>
           </ul>
         </div>
       </div>
     </div>
     <div class="col-xs-12 col-sm-4">
       <div class="office-show-card">
-        <h3>New Booking</h3>
-        <%= render 'components/form_booking', office: @office, booking: @booking %>
+        <h3>Book this Office</h3>
+        <%= render 'bookings/form_booking', office: @office, booking: @booking %>
       </div>
     </div>
   </div>

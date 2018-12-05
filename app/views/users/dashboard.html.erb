@@ -12,6 +12,20 @@
   </div>
 </div>
 
+user.offices
+        <% if policy(office).edit? %>
+          <%= link_to edit_office_path(office) do %>
+            <i class="fas fa-marker"></i>
+          <% end %>
+        <% end %>
+
+        <% if policy(office).destroy? %>
+          <%= link_to office_path(office),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } do %>
+                        <i class="far fa-trash-alt"></i>
+                      <% end %>
+        <% end %>
 
 display the information inside the current_user
 
