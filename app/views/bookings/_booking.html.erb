@@ -15,12 +15,16 @@
               <p>To: <%= booking.end_date.strftime("%a, %-d %b %Y") %></p>
           </div>
 
+              <%= link_to office_path(booking.office) do %>
+            <i class="fas fa-search"></i> Show
+            <% end %>
+          
           <p>
             <strong>Review:</strong>
             <% if booking.review %>
               <%= render 'reviews/review', review: booking.review %>
             <% elsif %>
-              <%= link_to new_office_booking_review_path(booking, booking.office) do %>
+              <%= link_to new_office_booking_review_path(booking.office, booking) do %>
               <button type="button" class="btn btn-outline-primary">Write a review</button>
                 <i class="fas fa-thumbs-up"></i>
               <% end %>
