@@ -6,3 +6,4 @@ if (dayRate) {
   initDatepickers();
 };
 
+import { chart } from '../components/chart';
