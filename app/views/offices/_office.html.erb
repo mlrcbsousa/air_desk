@@ -24,7 +24,7 @@
     </div>
     <div class="card-description">
       <div class="card-info">
-        <h3><%= office.dayrate %> €</h3>
+        <h3><%= office.dayrate.to_s.split(".")[0] %> €</h3>
         <p><%= office.location.match(/\s(\w+)$/) %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
       </div>
       <div class="card-cup-ratings">
