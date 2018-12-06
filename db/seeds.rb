@@ -2,10 +2,10 @@
 #--- Reseting DB (best to be in this order because of dependencies)
 # puts "Destroying all office attachments..."
 # OfficeAttachment.destroy_all
-puts "Destroying all reviews..."
-Review.destroy_all
-puts "Destroying all bookings..."
-Booking.destroy_all
+# puts "Destroying all reviews..."
+# Review.destroy_all
+# puts "Destroying all bookings..."
+# Booking.destroy_all
 # puts "Destroying all offices..."
 # Office.destroy_all
 # puts "Destroying all users..."
