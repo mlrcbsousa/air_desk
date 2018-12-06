@@ -23,8 +23,10 @@
 
 .cardbooking-description {
   display: flex;
+  flex-direction: column;
   position: relative;
   height: 70%;
+  padding-left : 10px;
   h3 {
    font-size: 22px;
    color: $gray;
@@ -34,20 +36,12 @@
     color: $gray;
     font-weight: lighter;
   }
-    .card-info {
-      position: absolute;
-      top: 0px;
-      left: 15px;
-      .dates-info {
-        p {
-        font-size: 10px;
-        }
+    .dates-info {
+      p {
+      font-size: 10px;
       }
     }
     .card-cup-ratings {
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
       font-size: 15px;
       text-transform: uppercase;
     }
@@ -57,6 +51,12 @@
       top: 5px;
       width: 40px;
       border-radius: 50%;
+    }
+    .booking-review {
+      color: $gray;
+      p {
+      font-size: 10px;
+      }
     }
 }
 

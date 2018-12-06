@@ -1,41 +1,47 @@
 <!-- views/bookings/_booking.html.erb -->
-  <div class="col-xs-12 col-sm-4">
-    <div class="cardbooking">
-      <div class="cardbooking-pictures">
-        <h4><%= booking.office.name %></h4>
+<div class="col-xs-12 col-sm-4">
+  <div class="cardbooking">
+
+    <div class="cardbooking-pictures">
+      <h4><%= booking.office.name %></h4>
+    </div>
+
+    <div class="cardbooking-description">
+      <div class="card-info">
+        <h3><%= booking.price %> €</h3>
+        <p><%= booking.office.location %></p>
+        <p>Total time: <%= (booking.end_date - booking.start_date).to_i %> Days</p>
       </div>
 
-      <div class="cardbooking-description">
-        <div class="card-info">
-          <h3><%= booking.price %> €</h3>
-          <p><%= booking.office.location %></p>
-          <p>Total time: <%= (booking.end_date - booking.start_date).to_i %> Days</p>
-          <div class="dates-info">
-              <p>From: <%= booking.start_date.strftime("%a, %-d %b %Y") %></p>
-              <p>To: <%= booking.end_date.strftime("%a, %-d %b %Y") %></p>
-          </div>
+      <div class="cardbooking-user">
+        <%= image_tag booking.office.user.avatar.url, class: "card-user" %>
+      </div>
 
-          <%= link_to office_path(booking.office) do %>
-            <i class="fas fa-search"></i> Show
-          <% end %>
-          
+      <div class="dates-info">
+        <p>From: <%= booking.start_date.strftime("%a, %-d %b %Y") %></p>
+        <p>To: <%= booking.end_date.strftime("%a, %-d %b %Y") %></p>
+      </div>
+
+      <div class="office-link">
+        <p><%= link_to office_path(booking.office) do %>
+          <i class="fas fa-search"></i> See the office
+          <% end %></p>
+      </div>
+
+      <div class="booking-review">
+        <h5>Review:</h5>
           <p>
-            <strong>Review:</strong>
             <% if booking.review %>
-              <%= render 'reviews/review', review: booking.review %>
+            <%= render 'reviews/review', review: booking.review %>
             <% elsif %>
               <%= link_to new_office_booking_review_path(booking.office, booking) do %>
-              <button type="button" class="btn btn-outline-primary">Write a review</button>
-                <i class="fas fa-thumbs-up"></i>
-              <% end %>
+                  <button type="button" class="btn btn-outline-primary">Write a review</button>
+                  <i class="fas fa-thumbs-up"></i>
+                <% end %>
             <% end %>
           </p>
-
-        </div>
-
-        <div class="cardbooking-user">
-          <%= image_tag booking.office.user.avatar.url, class: "card-user" %>
-        </div>
       </div>
+
     </div>
   </div>
+</div>

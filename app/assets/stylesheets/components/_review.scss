@@ -1,6 +1,5 @@
 .review {
-  padding: 10px;
-  border-bottom: 10px solid rgba(220,224,244,0.4);
+  padding: 0px;
   &:last-child {
     border-bottom: none;
   }
@@ -26,9 +25,5 @@
 }
 
 .review-body {
-  padding-left: 10px;
   font-size: 10px;
-  p {
-    margin: 6px 0;
-  }
 }
