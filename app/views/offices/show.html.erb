@@ -29,7 +29,7 @@
           <%= image_tag @office.user.avatar.url, width: 80, class: "img-circle" %>
         </div>
         <p id="dayrate"><%= @office.dayrate %> € / day</p>
-        <p><%= @office.location %> - <%= @office.capacity %> <i class="fas fa-user-friends"></i></p>
+        <p><%= @office.city %> - <%= @office.capacity %> <i class="fas fa-user-friends"></i></p>
         <p>
           Average rating:
           <% if @office.avg_rating == 0 %>

@@ -9,7 +9,7 @@
     <div class="cardbooking-description">
       <div class="card-info">
         <h3><%= booking.format_price %> €</h3>
-        <p><%= booking.office.location %></p>
+        <p><%= booking.office.city %></p>
         <p>Total time: <%= (booking.end_date - booking.start_date).to_i %> Days</p>
       </div>
 
