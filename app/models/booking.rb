@@ -17,6 +17,15 @@ class Booking < ApplicationRecord
   include PgSearch
   multisearchable against: %i[start_date end_date price]
 
+  def format_price
+    iprice = price.to_i
+    if iprice > 999
+      iprice.to_s.insert(-4, ',')
+    else
+      iprice
+    end
+  end
+
   private
 
   def set_price
