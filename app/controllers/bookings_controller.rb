@@ -4,6 +4,8 @@ class BookingsController < ApplicationController
     @booking = @office.bookings.new(params_booking)
     @booking.user = current_user
     authorize @booking
+    @reviews = @office.reviews
+    @office_attachments = @office.office_attachments
     # backend javascript check render 'offices/show' if booking.price != booking.set_price
     render 'offices/show', alert: 'You can not book your own office!' if @booking.user == @booking.office.user
     if @booking.save
