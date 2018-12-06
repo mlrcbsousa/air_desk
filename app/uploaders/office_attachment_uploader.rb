@@ -4,6 +4,18 @@ class OfficeAttachmentUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
   include Cloudinary::CarrierWave
 
+  def public_id
+    "lewagon/airdesk/#{model.class}/" + Cloudinary::Utils.random_public_id
+  end
+
+  # def delete_remote?
+  #   false
+  # end
+
+  version :thumbnail do
+    resize_to_fit 640, 480
+  end
+
   # Choose what kind of storage to use for this uploader:
   # storage :file
   # storage :fog
