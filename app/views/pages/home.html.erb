@@ -1,18 +1,16 @@
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(70,206,224,0.5) 0%, rgba(40,120,130,0.2) 50%), url(<%= image_path('coffee_banner.jpg') %>);">
+  <div class="loginbutton">
+    <% if user_signed_in? %>
+      <% link_to destroy_user_session_path, method: :delete do %>
+        <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+      <% end %>
+    <% else %>
+      <!-- Login link (when logged out) -->
+      <%= link_to t(".sign_in", default: "Sign Up"), new_user_session_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <!-- end of button -->
   <div class="banner-content">
-    <div class="loginbutton">
-      <% if user_signed_in? %>
-        <% link_to destroy_user_session_path, method: :delete do %>
-          <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-        <% end %>
-      <% else %>
-        <!-- Login link (when logged out) -->
-        <p>
-          <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-link" %>
-        <% end %>
-      </p>
-    </div>
-    <!-- end of button -->
     <%= image_tag 'airdnc-white.png' %>
     <p>[EVERYTHING you need]</p>
     <%= render 'shared/search' %>
