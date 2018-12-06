@@ -14,7 +14,9 @@
 
 .card-pictures{
   position: relative;
-  background-color: $blue;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   height: 60%;
   text-align: center;
   padding: 20px;

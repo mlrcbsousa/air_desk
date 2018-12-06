@@ -1,7 +1,7 @@
 <!-- views/offices/_office.html.erb -->
 <div class="col-xs-12 col-sm-4">
   <div class="card">
-    <div class="card-pictures">
+    <div class="card-pictures" style="background-image: url(<%= cl_image_path office.office_attachments.first.attachment.url unless office.office_attachments.empty? %>)">
       <h4><%= office.name %></h4>
       <div class="card-edits">
         <!-- Make these links accessible, currently whole card will refirect to show -->
