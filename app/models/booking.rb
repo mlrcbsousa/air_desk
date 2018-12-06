@@ -14,6 +14,9 @@ class Booking < ApplicationRecord
   validates_date :start_date, on_or_after: :today
   validates_date :end_date, on_or_after: :start_date
 
+  include PgSearch
+  multisearchable against: %i[start_date end_date price]
+
   private
 
   def set_price

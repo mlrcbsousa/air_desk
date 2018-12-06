@@ -7,7 +7,22 @@ class OfficesController < ApplicationController
   def index
     @total = Office.count
     @query = params[:query]
-    offices = @query ? Office.where("name LIKE '%#{@query}%'") : Office.all
+    if @query.present?
+    # sql_query = " \
+      # offices.name @@ :query \
+      # OR offices.location @@ :query \
+      # "
+      # OR offices.dayrate @@ :query \
+      # OR offices.capacity @@ :query \
+      # offices = Office.where(sql_query, query: "%#{@query}%")
+      # offices = Office.search_by_name_and_location(@query)
+      offices = Office.global_search(@query)
+      # .joins(:users)
+
+      # results = PgSearch.multisearch(@query)
+    else
+      offices = Office.all
+    end
     @offices = policy_scope(offices).order(created_at: :desc)
   end
 

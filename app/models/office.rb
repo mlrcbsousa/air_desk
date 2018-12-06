@@ -15,6 +15,24 @@ class Office < ApplicationRecord
   validates :name, length: { in: 10..140 }
   validates :name, :location, allow_blank: false, format: { with: /\A([a-z ]+)\z/i }
 
+  include PgSearch
+  multisearchable against: %i[name location]
+
+  pg_search_scope :search_by_name_and_location,
+                  against: %i[name location],
+                  using: {
+                    tsearch: { prefix: true } # <-- now `superman batm` will return something!
+                  }
+
+  pg_search_scope :global_search,
+                  against: %i[name location],
+                  associated_against: {
+                    user: %i[email first_name last_name username]
+                  },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
+
   def avg_rating
     return 0 if reviews.count.zero?
 

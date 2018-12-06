@@ -6,4 +6,7 @@ class Review < ApplicationRecord
 
   # Validations
   validates :rating, presence: true, numericality: true, inclusion: { in: (0..5) }
+
+  include PgSearch
+  multisearchable against: [:rating]
 end
