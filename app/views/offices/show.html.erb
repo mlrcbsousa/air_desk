@@ -57,10 +57,12 @@
       <div class="office-show-card">
         <p id="notice"><%= notice %></p>
         <h3>Add attachment:</h3>
-        <% @office_attachments.each do |p| %>
-          <%= image_tag p.attachment_url %>
-          <%= link_to "Edit Attachment", edit_office_office_attachment_path(@office, p) %>
-        <% end %>
+            <% @office_attachments.each do |p| %>
+          <div class="offices-pictures">
+            <%= image_tag p.attachment_url %>
+            <p><%= link_to "Edit Attachment", edit_office_office_attachment_path(@office, p) %></p>
+            <% end %>
+          </div>
       </div>
     </div>
   </div>
