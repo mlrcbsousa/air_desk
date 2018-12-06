@@ -4,11 +4,12 @@ class BookingsController < ApplicationController
     @booking = @office.bookings.new(params_booking)
     @booking.user = current_user
     authorize @booking
-    # render 'offices/show' if booking.price != booking.set_price
+    # backend javascript check render 'offices/show' if booking.price != booking.set_price
+    render 'offices/show', alert: 'You can not book your own office!' if @booking.user == @booking.office.user
     if @booking.save
-      redirect_to dashboard_path
+      redirect_to dashboard_path, notice: 'Booking successfully created.'
     else
-      render 'offices/show'
+      render 'offices/show', alert: 'Could not create Booking.'
     end
   end
 
