@@ -1,8 +1,9 @@
 <!-- views/offices/_office.html.erb -->
 <div class="col-xs-12 col-sm-4">
   <div class="card">
-    <div class="card-pictures" style="background-image: url(<%= cl_image_path office.office_attachments.first.attachment.url unless office.office_attachments.empty? %>)">
+    <div class="card-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path office.office_attachments.first.attachment.url unless office.office_attachments.empty? %>)">
       <h4><%= office.name %></h4>
+      <%= link_to '', office_path(office), class: 'card-link' %>
       <div class="card-edits">
         <!-- Make these links accessible, currently whole card will refirect to show -->
         <p>
@@ -24,7 +25,7 @@
     <div class="card-description">
       <div class="card-info">
         <h3><%= office.dayrate %> €</h3>
-        <p><%= office.location %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
+        <p><%= office.location.match(/\s(\w+)$/) %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
       </div>
       <div class="card-cup-ratings">
         <% unless office.avg_rating == 0 %>
@@ -35,6 +36,5 @@
         <%= image_tag office.user.avatar.url, class: "card-user" %>
       </div>
     </div>
-    <%= link_to '', office_path(office), class: 'card-link' %>
   </div>
 </div>

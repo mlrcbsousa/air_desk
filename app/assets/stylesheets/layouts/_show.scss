@@ -28,3 +28,13 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.offices-pictures {
+  img {
+    width:240px; /* you can use % */
+    height: auto;
+  }
+  p{
+    font-size: 10px;
+  }
+}
