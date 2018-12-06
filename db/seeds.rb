@@ -1,16 +1,19 @@
-# #--- Reseting DB (best to be in this order because of dependencies)
+#--- IMPORTANT ONLY SELECT THE ONES YOU NEED
+#--- Reseting DB (best to be in this order because of dependencies)
 # puts "Destroying all office attachments..."
 # OfficeAttachment.destroy_all
-# puts "Destroying all reviews..."
-# Review.destroy_all
-# puts "Destroying all bookings..."
-# Booking.destroy_all
+puts "Destroying all reviews..."
+Review.destroy_all
+puts "Destroying all bookings..."
+Booking.destroy_all
 # puts "Destroying all offices..."
 # Office.destroy_all
 # puts "Destroying all users..."
 # User.destroy_all
 
-# #--- Generating Users
+# #---- Generating Users
+
+#---- Us 4, admins
 
 # first_name = %w[Chris Manuel Antoine Thibaut]
 # last_name = ['Sisserian', 'Sousa', 'Welter', 'De Briey']
@@ -34,6 +37,45 @@
 #   )
 #   user.save!
 # end
+
+#---- Classmates
+
+images = [
+  'Annanda.jpg',
+  'Ben.jpg',
+  'Carlotta.jpg',
+  'Carolina.jpg',
+  'Clelia.jpg',
+  'Clement.jpg',
+  'Daniel.jpg',
+  'Emily.jpg',
+  'Hellena.jpg',
+  'Ines.jpg',
+  'Jami.jpg',
+  'jonny.jpg',
+  'Mathilde.jpg',
+  'Nick.jpg',
+  'Paul.png',
+  'Shannon.jpg',
+  'Thomas.jpg',
+  'Vasco.jpg'
+]
+
+cl = "https://res.cloudinary.com/www-mlrcbsousa-com/image/upload/v1544114342/lewagon/airdesk/Classmates/"
+
+images.each do |image|
+  clean = image.split('.')[0].downcase
+  user = User.new(
+    username: clean,
+    email: "#{clean}@airdnc.com",
+    first_name: clean.capitalize,
+    password: 'password'
+  )
+  user.remote_avatar_url = cl + image
+  user.save
+end
+
+#---- randoms
 
 # avatar_urls = JSON.parse(File.read("avatar_cloudinary_urls.json"), symbolize_names: true)
 
@@ -86,30 +128,30 @@
 
 # puts "Generated #{Office.count} offices in the database!"
 
-# #--- Generating Bookings
+#--- Generating Bookings
 
-# 200.times do
-#   Booking.create(
-#     start_date: Date.new(2019,rand(1..6),rand(1..28)),
-#     end_date: Date.new(2019,rand(7..12),rand(1..30)),
-#     user: User.all.sample,
-#     office: Office.all.sample
-#   )
-# end
+300.times do
+  Booking.create(
+    start_date: Date.new(2019,rand(1..6),rand(1..28)),
+    end_date: Date.new(2019,rand(7..12),rand(1..30)),
+    user: User.all.sample,
+    office: Office.all.sample
+  )
+end
 
-# puts "Generated #{Booking.count} bookings in the database!"
+puts "Generated #{Booking.count} bookings in the database!"
 
-# #--- Generating Reviews
+#--- Generating Reviews
 
-# Booking.limit(140).each do |booking|
-#   booking.review = Review.new(
-#     rating: rand(0..5),
-#     content: Faker::TheITCrowd.quote
-#   )
-#   booking.save
-# end
+Booking.limit(200).each do |booking|
+  booking.review = Review.new(
+    rating: rand(0..5),
+    content: Faker::TheITCrowd.quote
+  )
+  booking.save
+end
 
-# puts "Generated #{Review.count} reviews in the database!"
+puts "Generated #{Review.count} reviews in the database!"
 
 # #--- Generating Office Attachments
 
