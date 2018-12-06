@@ -13,7 +13,7 @@ class Office < ApplicationRecord
   validates :capacity, inclusion: { in: (1..20) }
 
   validates :name, length: { in: 10..140 }
-  validates :name, :location, allow_blank: false, format: { with: /\A([a-z ]+)\z/i }
+  validates :name, :location, allow_blank: false, format: { with: /\A([a-z 0-9\.\'\:']+)\z/i }
 
   include PgSearch
   multisearchable against: %i[name location]
