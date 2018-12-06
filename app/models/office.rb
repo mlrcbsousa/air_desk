@@ -8,24 +8,25 @@ class Office < ApplicationRecord
   belongs_to :user
 
   # Validations
-  validates :location, :name, :capacity, :dayrate, presence: true
+  validates :city, :street, :name, :capacity, :dayrate, presence: true
   validates :dayrate, :capacity, numericality: true
   validates :capacity, inclusion: { in: (1..20) }
 
   validates :name, length: { in: 10..140 }
-  validates :name, :location, allow_blank: false, format: { with: /\A([a-z 0-9\.\'\:']+)\z/i }
+  validates :name, :city, :street, allow_blank: false, format: { with: /\A([a-z 0-9\.\'\:']+)\z/i }
 
   include PgSearch
-  multisearchable against: %i[name location]
+  multisearchable against: %i[name city street]
 
-  pg_search_scope :search_by_name_and_location,
-                  against: %i[name location],
+  # example
+  pg_search_scope :search_by_name_and_city_and_street,
+                  against: %i[name city street],
                   using: {
                     tsearch: { prefix: true } # <-- now `superman batm` will return something!
                   }
 
   pg_search_scope :global_search,
-                  against: %i[name location],
+                  against: %i[name city street],
                   associated_against: {
                     user: %i[email first_name last_name username]
                   },

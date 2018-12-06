@@ -78,7 +78,8 @@ class OfficesController < ApplicationController
   def params_office
     params.require(:office).permit(
       :name,
-      :location,
+      :city,
+      :street,
       :description,
       :capacity,
       :dayrate,
