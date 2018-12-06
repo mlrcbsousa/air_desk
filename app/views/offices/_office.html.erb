@@ -7,40 +7,34 @@
         <!-- Make these links accessible, currently whole card will refirect to show -->
         <p>
           <% if policy(office).edit? %>
-          <%= link_to edit_office_path(office) do %>
-            <i class="fas fa-pencil-alt"></i>
+            <%= link_to edit_office_path(office) do %>
+              <i class="fas fa-pencil-alt"></i>
             <% end %>
           <% end %>
-
           <% if policy(office).destroy? %>
             <%= link_to office_path(office),
             method: :delete,
             data: { confirm: "Are you sure?" } do %>
-            <i class="far fa-trash-alt"></i>
+              <i class="far fa-trash-alt"></i>
             <% end %>
           <% end %>
         </p>
       </div>
     </div>
-
     <div class="card-description">
       <div class="card-info">
         <h3><%= office.dayrate %> €</h3>
         <p><%= office.location %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
       </div>
       <div class="card-cup-ratings">
-
         <% unless office.avg_rating == 0 %>
-        <%= render 'shared/rating', office: office %>
+          <%= render 'shared/rating', office: office %>
         <% end %>
       </div>
       <div class="card-user">
         <%= image_tag office.user.avatar.url, class: "card-user" %>
       </div>
     </div>
-
     <%= link_to '', office_path(office), class: 'card-link' %>
   </div>
 </div>
-
-

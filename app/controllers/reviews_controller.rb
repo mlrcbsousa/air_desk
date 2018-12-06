@@ -2,6 +2,8 @@ class ReviewsController < ApplicationController
   before_action :set_office, :set_booking
 
   def new
+    @booking = Booking.find(params[:booking_id])
+    @office = Office.find(params[:office_id])
     @review = Review.new
     authorize @review
   end

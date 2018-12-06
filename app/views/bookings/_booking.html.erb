@@ -15,9 +15,9 @@
               <p>To: <%= booking.end_date.strftime("%a, %-d %b %Y") %></p>
           </div>
 
-              <%= link_to office_path(booking.office) do %>
+          <%= link_to office_path(booking.office) do %>
             <i class="fas fa-search"></i> Show
-            <% end %>
+          <% end %>
           
           <p>
             <strong>Review:</strong>
