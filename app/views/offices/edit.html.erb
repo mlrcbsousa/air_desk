@@ -4,8 +4,13 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <div class="office-show-card">
-          <h1>Edit Office</h1>
-          <%= render 'form_office', office: @office %>
+          <h1>
+            Edit Office
+            <%= link_to @office do %>
+              <i class="fas fa-undo-alt"></i>
+            <% end %>
+          </h1>
+          <%= render 'form_office_not_simple', office: @office %>
         </div>
       </div>
     </div>

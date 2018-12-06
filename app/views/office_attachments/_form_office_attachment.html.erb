@@ -1,15 +1,10 @@
 <!-- _form_office_attachment.html.erb -->
-<%= image_tag @office_attachment.attachment %>
-<%= simple_form_for(@office_attachment) do |f| %>
-  <%= f.input :attachment, as: :file %>
-  <%= f.submit class: 'btn btn-primary' %>
-<% end %>
 
-<%= image_tag @post_attachment.avatar %>
-<%= form_for(@post_attachment) do |f| %>
+<%= image_tag office_attachment.attachment.url %>
+<%= form_for [office, office_attachment] do |f| %>
   <div class="field">
-    <%= f.label :avatar %><br>
-    <%= f.file_field :avatar %>
+    <%= f.label :attachment %><br>
+    <%= f.file_field :attachment %>
   </div>
   <div class="actions">
     <%= f.submit %>
