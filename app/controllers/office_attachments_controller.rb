@@ -7,7 +7,7 @@ class OfficeAttachmentsController < ApplicationController
 
   def update
     authorize @office
-    if @office_attachment.update(office_attachment_params)
+    if @office_attachment.update(params_office_attachment)
       redirect_to @office, notice: 'Office attachment was successfully updated.'
     else
       render :edit, alert: 'Error while updating attachment.'
@@ -16,7 +16,7 @@ class OfficeAttachmentsController < ApplicationController
 
   private
 
-  def office_attachment_params
+  def params_office_attachment
     params.require(:office_attachment).permit(:attachment, :office_id)
   end
 

@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'users#dashboard'
 
   resources :offices do
-    resources :bookings, only: :create do
-      resources :reviews, only: %i[new create]
+    resources :bookings, only: %i[create edit update destroy] do
+      resources :reviews, only: %i[new create edit update destroy]
     end
     resources :office_attachments, only: %i[create edit update destroy]
   end
@@ -12,5 +12,4 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'contact', to: 'pages#contact'
   get 'about', to: 'pages#about'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

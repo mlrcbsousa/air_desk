@@ -1,16 +1,33 @@
 <!-- views/components/_review.html.erb -->
   <div class="review">
-    <div class="review-created-at">
-      <%= cl_image_tag review.booking.user.avatar.url, class: "img-circle", width: 40 %>
-      <p><span><%= review.created_at.strftime("%a, %-d %b %Y (at %-I:%M%P)") %></span></p>
-    </div>
+    <% unless current_page?(dashboard_path) %>
+      <div class="review-created-at">
+        <%= cl_image_tag review.booking.user.avatar.url, class: "img-circle", width: 40 %>
+        <p></p>
+      </div>
+    <% end %>
     <div class="review-rating">
       <% review.rating.times do %>
         <i class="fas fa-coffee active"></i>
       <% end %>
       <% (5 - review.rating).times do %>
         <i class="fas fa-coffee inactive"></i>
+      <% end %> -
+      <span><%= review.created_at.strftime("%a, %-d %b %Y (at %-I:%M%P)") %></span>
+
+      <% if policy(review.booking).edit? %>
+        <%= link_to edit_office_booking_review_path(review.booking.office, review.booking, review) do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
       <% end %>
+      <% if policy(review.booking).destroy? %>
+        <%= link_to office_booking_review_path(review.booking.office, review.booking, review),
+        method: :delete,
+        data: { confirm: "Are you sure?" } do %>
+          <i class="far fa-trash-alt"></i>
+        <% end %>
+      <% end %>
+
     </div>
     <div class="review-body">
       <p><%= review.content %></p>

@@ -28,8 +28,10 @@ class OfficesController < ApplicationController
     @office.user = current_user
     authorize @office
     if @office.save
-      params[:office_attachments]['attachment'].each do |a|
-        @office_attachment = @office.office_attachments.create!(attachment: a)
+      unless params[:office_attachments].nil?
+        params[:office_attachments]['attachment'].each do |a|
+          @office_attachment = @office.office_attachments.create!(attachment: a)
+        end
       end
       redirect_to @office, notice: 'Office was successfully created.'
     else

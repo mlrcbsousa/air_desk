@@ -50,15 +50,17 @@
       </div>
     </div>
     <div class="col-xs-12 col-sm-4">
-      <div class="office-show-card">
-        <h3>Book this Office</h3>
-        <%= render 'bookings/form_booking', office: @office, booking: @booking %>
-      </div>
+      <% unless @office.user == current_user %>
+        <div class="office-show-card">
+          <h3>Book this Office</h3>
+          <%= render 'bookings/form_booking', office: @office, booking: @booking %>
+        </div>
+      <% end %>
     </div>
     <div class="col-xs-12 col-sm-4">
       <div class="office-show-card">
         <p id="notice"><%= notice %></p>
-        <h3>Add attachment:</h3>
+        <h3>Gallery:</h3>
             <% @office_attachments.each do |p| %>
           <div class="offices-pictures">
             <%= image_tag p.attachment_url %>

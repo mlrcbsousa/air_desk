@@ -25,3 +25,4 @@
 #                               public_id: image.split('.')[0]
 #                               )
 # end
+

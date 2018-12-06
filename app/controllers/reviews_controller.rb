@@ -1,15 +1,14 @@
 class ReviewsController < ApplicationController
   before_action :set_office, :set_booking
+  before_action :set_review, only: %i[edit update destroy]
 
   def new
-    @booking = Booking.find(params[:booking_id])
-    @office = Office.find(params[:office_id])
     @review = Review.new
     authorize @review
   end
 
   def create
-    @review = Review.new(review_params)
+    @review = Review.new(params_review)
     @review.booking = @booking
     authorize @review
 
@@ -18,6 +17,26 @@ class ReviewsController < ApplicationController
     else
       render :new, alert: 'Unable to create your review.'
     end
+  end
+
+  def edit
+    authorize @review.booking
+  end
+
+  def update
+    authorize @review.booking
+    @review.update(params_review)
+    if @review.save
+      redirect_to dashboard_path, notice: 'Review was successfully updated.'
+    else
+      render :edit, alert: 'Unable to update review.'
+    end
+  end
+
+  def destroy
+    authorize @review.booking
+    @review.destroy
+    redirect_to dashboard_path, notice: 'Review was successfully deleted.'
   end
 
   private
@@ -30,7 +49,11 @@ class ReviewsController < ApplicationController
     @booking = Booking.find(params[:booking_id])
   end
 
-  def review_params
+  def set_review
+    @review = Review.find(params[:id])
+  end
+
+  def params_review
     params.require(:review).permit(:content, :rating)
   end
 end
