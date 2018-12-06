@@ -13,30 +13,28 @@ class OfficesController < ApplicationController
 
   def new
     @office = Office.new
+    @office_attachment = @office.office_attachments.build
     authorize @office
   end
 
   def create
     @office = Office.new(params_office)
+    @office.user = current_user
     authorize @office
 
-    respond_to do |format|
-      if @office.save
-        params[:office_attachments]['attachment'].each do |a|
-          @office_attachment = @office.office_attachments.create!(attachment: a)
-        end
-        format.html { redirect_to @office, notice: 'office was successfully created.' }
-      else
-        format.html { render action: 'new' }
+    if @office.save
+      params[:office_attachments]['attachment'].each do |a|
+        @office_attachment = @office.office_attachments.create!(attachment: a)
       end
+      redirect_to @office, notice: 'Office was successfully created.'
+    else
+      render :new, alert: 'Unable to create office.'
     end
   end
 
   def show
     authorize @office
-    @booking = Booking.new # to generate the simple form
-    # this is some sexy shit right here, no jokes, but not needed lol
-    # @reviews = @office.bookings.select(&:review).map!(&:review)
+    @booking = Booking.new
     @reviews = @office.reviews
     @office_attachments = @office.office_attachments.all
   end
@@ -48,16 +46,16 @@ class OfficesController < ApplicationController
   def update
     @office.update(params_office)
     if @office.save
-      redirect_to office_path(@office)
+      redirect_to @office, notice: 'Office was successfully updated.'
     else
-      render :edit
+      render :edit, alert: 'Unable to update office.'
     end
   end
 
   def destroy
     authorize @office
     @office.destroy
-    redirect_to dashboard_path
+    redirect_to dashboard_path, notice: 'Office was successfully deleted.'
   end
 
   private

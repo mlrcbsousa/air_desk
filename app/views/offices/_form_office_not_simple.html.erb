@@ -1,0 +1,31 @@
+<!-- _form_office_not_simple.html.erb -->
+
+<%= form_for(office, :html => { :multipart => true }) do |f| %>
+   <div class="field">
+     <%= f.label :name %><br>
+    <%= f.text_field :name %>
+   </div>
+   <div class="field">
+     <%= f.label :location %><br>
+     <%= f.text_field :location %>
+   </div>
+   <div class="field">
+     <%= f.label :capacity %><br>
+     <%= f.number_field :capacity %>
+   </div>
+   <div class="field">
+     <%= f.label :dayrate %><br>
+     <%= f.number_field :dayrate %>
+   </div>
+
+   <%= f.fields_for :office_attachments do |p| %>
+     <div class="field">
+       <%= p.label :attachment %><br>
+       <%= p.file_field :attachment, :multiple => true, name: "office_attachments[attachment][]" %>
+     </div>
+   <% end %>
+
+   <div class="actions">
+     <%= f.submit %>
+   </div>
+<% end %>
