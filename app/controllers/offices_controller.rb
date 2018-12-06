@@ -36,7 +36,6 @@ class OfficesController < ApplicationController
     @office = Office.new(params_office)
     @office.user = current_user
     authorize @office
-
     if @office.save
       params[:office_attachments]['attachment'].each do |a|
         @office_attachment = @office.office_attachments.create!(attachment: a)
@@ -59,6 +58,7 @@ class OfficesController < ApplicationController
   end
 
   def update
+    authorize @office
     @office.update(params_office)
     if @office.save
       redirect_to @office, notice: 'Office was successfully updated.'
