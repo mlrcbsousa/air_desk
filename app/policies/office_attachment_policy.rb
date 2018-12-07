@@ -5,6 +5,8 @@ class OfficeAttachmentPolicy < ApplicationPolicy
     end
   end
 
+
+
   def create?
     record.user == user
   end

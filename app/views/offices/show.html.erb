@@ -1,5 +1,8 @@
 <!-- app/views/offices/show.html.erb -->
-<div class="office" style="background-image: url(<%= cl_image_path @office.office_attachments.first.attachment.url unless @office.office_attachments.empty? %>)"></div>
+<div class="office" style="background-image: url(<%= cl_image_path @office.set_main.attachment.url %>)"></div>
+
+<!--  -->
+
 <div class="container margin-top-negative">
   <div class="row">
     <div class="office-show-info col-xs-12 col-sm-8">
@@ -57,25 +60,29 @@
             <% end %>
           <% end %>
         </h3>
+        <% @office_attachments.each do |office_attachment| %>
+          <div class="offices-picture">
 
-          <% @office_attachments.each do |office_attachment| %>
+            <%= cl_image_tag office_attachment.attachment %>
+            <% if current_user == @office.user %>
 
-              <div class="offices-pictures">
-                <%= cl_image_tag office_attachment.attachment %>
+              <%= link_to edit_office_office_attachment_path(office_attachment.office, office_attachment) do %>
+                <i class="fas fa-pencil-alt"></i>
+              <% end %>
 
-                <% if current_user == @office.user %>
-                  <%= link_to edit_office_office_attachment_path(office_attachment.office, office_attachment) do %>
-                    <i class="fas fa-pencil-alt"></i>
-                  <% end %>
+              <%= link_to office_office_attachment_path(office_attachment.office, office_attachment),
+              method: :delete,
+              data: { confirm: "Are you sure?" } do %>
+                  <i class="far fa-trash-alt"></i>
+              <% end %>
 
-                    <%= link_to office_office_attachment_path(office_attachment.office, office_attachment),
-                    method: :delete,
-                    data: { confirm: "Are you sure?" } do %>
-                      <i class="far fa-trash-alt"></i>
-                  <% end %>
-                <% end %>
-              </div>
-          <% end %>
+              <%= link_to office_office_attachment_background_path(office_attachment.office, office_attachment) do %>
+                Make background
+              <% end %>
+
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
       <div class="office-show-card">

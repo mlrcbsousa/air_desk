@@ -1,6 +1,16 @@
 class OfficeAttachmentsController < ApplicationController
   before_action :set_office
-  before_action :set_office_attachment, except: %i[new create]
+  before_action :set_office_attachment, except: %i[new create background]
+
+  def background
+    authorize @office
+    @office.office_attachments.each do |office_attachment|
+      office_attachment.update(main: false)
+    end
+    @office_attachment = OfficeAttachment.find(params[:office_attachment_id])
+    @office_attachment.update(main: true)
+    redirect_to office_path(@office), notice: 'Successfully changed your main Image!'
+  end
 
   def new
     authorize @office

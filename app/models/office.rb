@@ -45,4 +45,8 @@ class Office < ApplicationRecord
 
     reviews.map(&:rating).sum / reviews.count
   end
+
+  def set_main
+    office_attachments.select { |office_attachment| office_attachment.main == true }[0]
+  end
 end

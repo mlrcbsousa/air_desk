@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_090029) do
+ActiveRecord::Schema.define(version: 2018_12_07_102928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_090029) do
     t.datetime "updated_at", null: false
     t.string "attachment"
     t.bigint "office_id"
-    t.boolean "main"
+    t.boolean "main", default: true
     t.index ["office_id"], name: "index_office_attachments_on_office_id"
   end
 
