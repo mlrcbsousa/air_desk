@@ -33,6 +33,12 @@ class OfficeAttachmentsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @office
+    @office_attachment.destroy
+    redirect_to office_path(@office), notice: 'Image was successfully deleted.'
+  end
+
   private
 
   def params_office_attachment

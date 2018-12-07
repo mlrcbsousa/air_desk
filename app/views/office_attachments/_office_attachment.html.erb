@@ -1,7 +1,6 @@
 <!-- _office.attachment.html.erb -->
   <div class="offices-pictures" style="background-image: url(<%= cl_image_path office_attachment.attachment.url %>);" ba>
     <%= cl_image_tag office_attachment.attachment.url %>
-IS THIS SHIT EVEN HERE
     <% if policy(office_attachment.office).edit? %>
       <%= link_to edit_office_office_attachment_path(office_attachment.office, office_attachment) do %>
         <i class="fas fa-pencil-alt"></i>
