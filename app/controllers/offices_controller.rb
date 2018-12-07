@@ -15,6 +15,10 @@ class OfficesController < ApplicationController
       offices = Office.all
     end
     @offices = policy_scope(offices).order(created_at: :desc)
+
+
+    # @offices = Office.where.not(latitude: nil, longitude: nil)
+    @markers = @offices.map(&:set_marker)
   end
 
   def new
@@ -44,6 +48,7 @@ class OfficesController < ApplicationController
     @booking = Booking.new
     @reviews = @office.reviews
     @office_attachments = @office.office_attachments
+    @markers = [@office.set_marker]
   end
 
   def edit
