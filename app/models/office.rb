@@ -1,4 +1,7 @@
 class Office < ApplicationRecord
+  geocoded_by :address
+  after_validation :geocode # if: :will_save_change_to_address?
+
   # Associations
   has_many :office_attachments, dependent: :destroy
   accepts_nested_attributes_for :office_attachments
@@ -48,5 +51,13 @@ class Office < ApplicationRecord
 
   def set_main
     office_attachments.select { |office_attachment| office_attachment.main == true }[0]
+  end
+
+  def address
+    "#{street}, #{city}"
+  end
+
+  def set_marker
+    { lng: longitude, lat: latitude }
   end
 end
