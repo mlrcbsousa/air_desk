@@ -30,7 +30,8 @@
 }
 .offices-picture {
   img {
-    width: 180px;
+    width: 220px;
+    height: 180px;
     padding: 10px;
   }
   p {
@@ -61,4 +62,14 @@
     font-weight: bold;
     font-size: 24px;
   }
+}
+
+#map {
+  background-color: $light-gray;
+  text-align: center;
+}
+
+.offices-picture {
+  font-size: 12px;
+  text-align: center;
 }
