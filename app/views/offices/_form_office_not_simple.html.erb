@@ -42,8 +42,8 @@
   </div>
 
   <%= f.fields_for :office_attachments do |p| %>
-    <div class="field form-group">
-      <%= p.label :attachment, class: "control-label" %><br>
+    <div class="field">
+      <%= p.label :attachment %><br>
       <%= p.file_field :attachment, :multiple => true, name: "office_attachments[attachment][]" %>
     </div>
   <% end %>
