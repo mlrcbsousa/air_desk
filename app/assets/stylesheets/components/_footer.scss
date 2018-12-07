@@ -19,8 +19,9 @@
   padding: 0px 10px;
 }
 .footer-links a:hover {
+  color: $blue;
   opacity: 1;
 }
-.footer .fa-heart {
-  color: #D23333;
+.footer .fa-coffee {
+  color: $blue;
 }
