@@ -1,0 +1,26 @@
+<!-- views/components/edit.html.erb -->
+<div class="container padding-top-30">
+  <div class="new">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <div class="office-show-card">
+          <h1>Edit Booking
+            <%= link_to dashboard_path do %>
+              <i class="fas fa-undo-alt"></i>
+            <% end %>
+          </h1>
+          <%= simple_form_for [@office, @booking] do |f| %>
+            <%= f.input :start_date, as: :string %>
+            <%= f.input :end_date, as: :string %>
+            <p>
+              <strong>Price:</strong>
+              <span id="total-price"></span>
+            </p>
+            <%= f.submit 'Update my Booking', class: 'btn btn-default' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

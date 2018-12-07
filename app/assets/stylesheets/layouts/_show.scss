@@ -1,5 +1,5 @@
 .office {
-  height: 250px;
+  height: 350px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -28,13 +28,37 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.offices-pictures {
+.offices-picture {
   img {
-    width:240px; /* you can use % */
-    height: auto;
+    width: 180px;
+    padding: 10px;
   }
-  p{
+  p {
     font-size: 10px;
+  }
+}
+
+.office-show-name {
+  text-align: center;
+  .icon {
+    font-size: 18px;
+  }
+}
+
+.office-details {
+  position: relative;
+  .user-avatar {
+    position: absolute;
+    text-align: center;
+    top: 20px;
+    right: 20px;
+  }
+  #dayrate {
+    display: none;
+  }
+  .dayrate {
+    color: $blue;
+    font-weight: bold;
+    font-size: 24px;
   }
 }

@@ -8,17 +8,8 @@ class OfficesController < ApplicationController
     @total = Office.count
     @query = params[:query]
     if @query.present?
-    # sql_query = " \
-      # offices.name @@ :query \
-      # OR offices.location @@ :query \
-      # "
-      # OR offices.dayrate @@ :query \
-      # OR offices.capacity @@ :query \
-      # offices = Office.where(sql_query, query: "%#{@query}%")
       # offices = Office.search_by_name_and_location(@query)
       offices = Office.global_search(@query)
-      # .joins(:users)
-
       # results = PgSearch.multisearch(@query)
     else
       offices = Office.all
@@ -36,10 +27,11 @@ class OfficesController < ApplicationController
     @office = Office.new(params_office)
     @office.user = current_user
     authorize @office
-
     if @office.save
-      params[:office_attachments]['attachment'].each do |a|
-        @office_attachment = @office.office_attachments.create!(attachment: a)
+      unless params[:office_attachments].nil?
+        params[:office_attachments]['attachment'].each do |a|
+          @office_attachment = @office.office_attachments.create!(attachment: a)
+        end
       end
       redirect_to @office, notice: 'Office was successfully created.'
     else
@@ -51,7 +43,7 @@ class OfficesController < ApplicationController
     authorize @office
     @booking = Booking.new
     @reviews = @office.reviews
-    @office_attachments = @office.office_attachments.all
+    @office_attachments = @office.office_attachments
   end
 
   def edit
@@ -59,6 +51,7 @@ class OfficesController < ApplicationController
   end
 
   def update
+    authorize @office
     @office.update(params_office)
     if @office.save
       redirect_to @office, notice: 'Office was successfully updated.'
@@ -78,7 +71,8 @@ class OfficesController < ApplicationController
   def params_office
     params.require(:office).permit(
       :name,
-      :location,
+      :city,
+      :street,
       :description,
       :capacity,
       :dayrate,

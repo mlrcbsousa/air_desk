@@ -4,11 +4,5 @@ class UsersController < ApplicationController
     authorize @user
     @bookings = @user.bookings
     @offices = @user.offices
-
-    # @reviews = @office.bookings.select(&:review).map!(&:review)
-    # @markers = @offices.map do |office|
-
   end
-
-
 end

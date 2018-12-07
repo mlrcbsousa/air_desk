@@ -3,14 +3,16 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'users#dashboard'
 
   resources :offices do
-    resources :bookings, only: :create do
-      resources :reviews, only: %i[new create]
+    resources :bookings, except: %i[index show new] do
+      resources :reviews, except: %i[index show]
     end
-    resources :office_attachments, only: %i[create edit update destroy]
+    resources :office_attachments, except: %i[index show] do
+      get 'background', to: 'office_attachments#background'
+    end
+
   end
 
   root to: 'pages#home'
   get 'contact', to: 'pages#contact'
   get 'about', to: 'pages#about'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

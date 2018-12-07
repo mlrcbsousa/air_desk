@@ -5,6 +5,10 @@ class OfficePolicy < ApplicationPolicy
     end
   end
 
+  def background?
+    true
+  end
+
   def create?
     true
   end

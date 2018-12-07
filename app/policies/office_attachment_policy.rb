@@ -5,7 +5,17 @@ class OfficeAttachmentPolicy < ApplicationPolicy
     end
   end
 
-  def udpate?
+
+
+  def create?
     record.user == user
+  end
+
+  def udpate?
+    true
+  end
+
+  def destroy?
+    true
   end
 end

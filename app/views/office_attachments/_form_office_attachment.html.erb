@@ -1,12 +1,8 @@
 <!-- _form_office_attachment.html.erb -->
+<%= image_tag office_attachment.attachment.url if office_attachment.attachment.url %>
 
-<%= image_tag office_attachment.attachment.url %>
-<%= form_for [office, office_attachment] do |f| %>
-  <div class="field">
-    <%= f.label :attachment %><br>
-    <%= f.file_field :attachment %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+<%= simple_form_for [office, office_attachment] do |f| %>
+  <%= f.input :attachment %>
+  <%= f.submit 'Add', class: 'btn btn-default' %>
 <% end %>

@@ -1,12 +1,17 @@
 <!-- views/offices/_office.html.erb -->
 <div class="col-xs-12 col-sm-4">
   <div class="card">
-    <div class="card-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path office.office_attachments.first.attachment.url unless office.office_attachments.empty? %>)">
+    <div class="card-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path office.set_main.attachment.url %>)">
+
       <h4><%= office.name %></h4>
       <%= link_to '', office_path(office), class: 'card-link' %>
-      <div class="card-edits">
-        <!-- Make these links accessible, currently whole card will refirect to show -->
-        <p>
+    </div>
+    <div class="card-description">
+      <div class="card-info">
+        <h3>
+          <%= office.format_dayrate %> €
+
+          <!-- links to edit and delete -->
           <% if policy(office).edit? %>
             <%= link_to edit_office_path(office) do %>
               <i class="fas fa-pencil-alt"></i>
@@ -19,22 +24,21 @@
               <i class="far fa-trash-alt"></i>
             <% end %>
           <% end %>
-        </p>
-      </div>
-    </div>
-    <div class="card-description">
-      <div class="card-info">
-        <h3><%= office.dayrate.to_s.split(".")[0] %> €</h3>
-        <p><%= office.location.match(/\s(\w+)$/) %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
+        </h3>
+
+        <p><%= office.city %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
+
       </div>
       <div class="card-cup-ratings">
         <% unless office.avg_rating == 0 %>
           <%= render 'shared/rating', office: office %>
         <% end %>
       </div>
-      <div class="card-user">
-        <%= image_tag office.user.avatar.url, class: "card-user" %>
-      </div>
+      <% unless current_page?(dashboard_path) %>
+        <div class="card-user">
+          <%= image_tag office.user.avatar.url, class: "card-user" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

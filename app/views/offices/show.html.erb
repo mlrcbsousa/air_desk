@@ -1,33 +1,42 @@
 <!-- app/views/offices/show.html.erb -->
-<div class="office" style="background-image: url(<%= cl_image_path @office.office_attachments.first.attachment.url unless @office.office_attachments.empty? %>)"></div>
+<div class="office" style="background-image: url(<%= cl_image_path @office.set_main.attachment.url %>)"></div>
+
+<!--  -->
+
 <div class="container margin-top-negative">
   <div class="row">
-    <div class="col-xs-12 col-sm-8">
-      <div class="office-show-card">
+    <div class="office-show-info col-xs-12 col-sm-8">
+      <div class="office-show-card office-show-name">
         <h2>
           <%= @office.name %>
+
+          <!-- links to edit delete office if you host it -->
           <% if policy(@office).edit? %>
             <%= link_to edit_office_path(@office) do %>
-              <i class="fas fa-pencil-alt"></i>
+              <i class="fas fa-pencil-alt icon"></i>
             <% end %>
           <% end %>
           <% if policy(@office).destroy? %>
             <%= link_to office_path(@office),
                         method: :delete,
                         data: { confirm: "Are you sure?" } do %>
-              <i class="far fa-trash-alt"></i>
+              <i class="far fa-trash-alt icon"></i>
             <% end %>
           <% end %>
           <%= link_to offices_path do %>
-              <i class="fas fa-undo-alt"></i>
+              <i class="fas fa-undo-alt icon"></i>
             <% end %>
         </h2>
       </div>
-      <div class="office-show-card">
-        <h3>Details:</h3>
-        <%= image_tag @office.user.avatar.url, width: 80, class: "img-circle" %>
-        <p id="dayrate"><%= @office.dayrate %> € /day</p>
-        <p><%= @office.location %> - <%= @office.capacity %> <i class="fas fa-user-friends"></i></p>
+      <div class="office-show-card office-details">
+        <h3>Office details:</h3>
+        <div class="user-avatar">
+          <%= image_tag @office.user.avatar.url, width: 80, class: "img-circle" %>
+        </div>
+        <!-- need this hidden for the javascript pricing -->
+        <p id="dayrate"><%= @office.dayrate %></p>
+        <p class="dayrate"><%= @office.format_dayrate %> € / day</p>
+        <p><%= @office.city %> - <%= @office.capacity %> <i class="fas fa-user-friends"></i></p>
         <p>
           Average rating:
           <% if @office.avg_rating == 0 %>
@@ -38,6 +47,44 @@
         </p>
         <p><%= @office.description %></p>
       </div>
+
+      <div class="office-show-card">
+        <h3>Gallery:
+          <!-- links to add office attachments -->
+          <% if current_user == @office.user %>
+
+            <% if policy(@office).create? %>
+              <%= link_to new_office_office_attachment_path(@office) do %>
+                <i class="fas fa-plus"></i>
+              <% end %>
+            <% end %>
+          <% end %>
+        </h3>
+        <% @office_attachments.each do |office_attachment| %>
+          <div class="offices-picture">
+
+            <%= cl_image_tag office_attachment.attachment %>
+            <% if current_user == @office.user %>
+
+              <%= link_to edit_office_office_attachment_path(office_attachment.office, office_attachment) do %>
+                <i class="fas fa-pencil-alt"></i>
+              <% end %>
+
+              <%= link_to office_office_attachment_path(office_attachment.office, office_attachment),
+              method: :delete,
+              data: { confirm: "Are you sure?" } do %>
+                  <i class="far fa-trash-alt"></i>
+              <% end %>
+
+              <%= link_to office_office_attachment_background_path(office_attachment.office, office_attachment) do %>
+                Make background
+              <% end %>
+
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
       <div class="office-show-card">
         <h3>Reviews:</h3>
         <div>
@@ -48,22 +95,14 @@
       </div>
     </div>
     <div class="col-xs-12 col-sm-4">
-      <div class="office-show-card">
-        <h3>Book this Office</h3>
-        <%= render 'bookings/form_booking', office: @office, booking: @booking %>
-      </div>
+      <% unless @office.user == current_user %>
+        <div class="office-show-card">
+          <h3>Book this Office</h3>
+          <%= render 'bookings/form_booking', office: @office, booking: @booking %>
+        </div>
+      <% end %>
     </div>
     <div class="col-xs-12 col-sm-4">
-      <div class="office-show-card">
-        <p id="notice"><%= notice %></p>
-        <h3>Add attachment:</h3>
-            <% @office_attachments.each do |p| %>
-          <div class="offices-pictures">
-            <%= image_tag p.attachment_url %>
-            <p><%= link_to "Edit Attachment", edit_office_office_attachment_path(@office, p) %></p>
-            <% end %>
-          </div>
-      </div>
     </div>
   </div>
 </div>

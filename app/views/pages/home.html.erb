@@ -1,8 +1,8 @@
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(70,206,224,0.5) 0%, rgba(40,120,130,0.2) 50%), url(<%= image_path('coffee_banner.jpg') %>);">
   <div class="loginbutton">
     <% if user_signed_in? %>
-      <% link_to destroy_user_session_path, method: :delete do %>
-        <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fa fa-sign-out-alt"></i>  <%= t(".sign_out", default: "Log out") %>
       <% end %>
     <% else %>
       <!-- Login link (when logged out) -->
@@ -19,10 +19,59 @@
   </div>
 </div>
 <div class="container">
-  <div class="index-title">
+  <div class="features padding-top-30 padding-bottom-30">
+
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="feature-card text-center">
+          <h3 class="text-primary">Accessible</h3>
+          <br>
+          <div>
+            <%= image_tag 'wind.svg', height: 150 %>
+          </div>
+          <br>
+          <span>Need to work somewhere? Can't find a place to focus?</span>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="feature-card text-center">
+          <h3 class="text-primary">Intuitive</h3>
+          <br>
+          <div>
+            <%= image_tag 'monitor.svg', height: 150 %>
+          </div>
+          <br>
+          <span>Book fast and clean, no hassle, no bother</span>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="feature-card text-center">
+          <h3 class="text-primary">Pleasing</h3>
+          <br>
+          <div>
+            <%= image_tag 'coffee.svg', height: 150 %>
+          </div>
+          <br>
+          <span>Have coffee while working and not having to worry, maybe <strong class="text-primary">
+            <% if policy(Office).create? %>
+              <%= link_to "become a host", new_office_path %>
+            <% end %>
+          </strong></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <hr>
+  <div class="index-title text-center">
     <h1 class="text-primary">Our top rated offices</h1>
+    <hr>
   </div>
   <div class="row">
     <%= render @offices %>
   </div>
+  <hr>
 </div>

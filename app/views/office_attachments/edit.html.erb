@@ -4,7 +4,11 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <div class="office-show-card">
-          <h1>Edit Office Photo</h1>
+          <h1>Edit Photo
+            <%= link_to office_path(@office) do %>
+              <i class="fas fa-undo-alt"></i>
+            <% end %>
+          </h1>
           <%= render 'form_office_attachment', office: @office, office_attachment: @office_attachment %>
         </div>
       </div>
