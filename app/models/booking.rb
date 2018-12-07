@@ -18,12 +18,9 @@ class Booking < ApplicationRecord
   multisearchable against: %i[start_date end_date price]
 
   def format_price
+    # because price is a float
     iprice = price.to_i
-    if iprice > 999
-      iprice.to_s.insert(-4, ',')
-    else
-      iprice
-    end
+    iprice > 999 ? iprice.to_s.insert(-4, ',') : iprice
   end
 
   private

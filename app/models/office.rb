@@ -34,6 +34,12 @@ class Office < ApplicationRecord
                     tsearch: { prefix: true }
                   }
 
+  def format_dayrate
+    array = dayrate.to_s.split(".")
+    fdayrate = array[0].to_i > 999 ? array[0].insert(-4, ',') : array[0]
+    array[1] == '0' ? fdayrate : fdayrate + array[1]
+  end
+
   def avg_rating
     return 0 if reviews.count.zero?
 

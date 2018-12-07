@@ -1,5 +1,24 @@
 class OfficeAttachmentsController < ApplicationController
-  before_action :set_office_attachment, :set_office
+  before_action :set_office
+  before_action :set_office_attachment, except: %i[new create]
+
+  def new
+    authorize @office
+    @office_attachment = OfficeAttachment.new
+  end
+
+  def create
+    @office_attachment = OfficeAttachment.new(params_office_attachment)
+    @office_attachment.office = @office
+    authorize @office
+
+    if @office_attachment.save
+      @office_attachments = @office.office_attachments
+      redirect_to office_path(@office), notice: 'Successfully added Photo to your Office!'
+    else
+      render :new, alert: 'Unable to add your photo.'
+    end
+  end
 
   def edit
     authorize @office

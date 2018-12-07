@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'users#dashboard'
 
   resources :offices do
-    resources :bookings, only: %i[create edit update destroy] do
-      resources :reviews, only: %i[new create edit update destroy]
+    resources :bookings, except: %i[index show new] do
+      resources :reviews, except: %i[index show]
     end
-    resources :office_attachments, only: %i[create edit update destroy]
+    resources :office_attachments, except: %i[index show]
   end
 
   root to: 'pages#home'

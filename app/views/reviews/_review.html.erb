@@ -15,6 +15,7 @@
       <% end %> -
       <span><%= review.created_at.strftime("%a, %-d %b %Y (at %-I:%M%P)") %></span>
 
+      <!-- links to edit and delete -->
       <% if policy(review.booking).edit? %>
         <%= link_to edit_office_booking_review_path(review.booking.office, review.booking, review) do %>
           <i class="fas fa-pencil-alt"></i>

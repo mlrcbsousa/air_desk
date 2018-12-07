@@ -26,3 +26,12 @@
 #                               )
 # end
 
+<%= form_for [office, office_attachment] do |f| %>
+  <div class="field">
+    <%= f.label :attachment %><br>
+    <%= f.file_field :attachment %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

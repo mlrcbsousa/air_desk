@@ -28,13 +28,11 @@
   justify-content: space-between;
   align-items: center;
 }
-
 .offices-pictures {
   img {
-    width:240px; /* you can use % */
-    height: auto;
+    height: 150px;
   }
-  p{
+  p {
     font-size: 10px;
   }
 }
@@ -55,6 +53,9 @@
     right: 20px;
   }
   #dayrate {
+    display: none;
+  }
+  .dayrate {
     color: $blue;
     font-weight: bold;
     font-size: 24px;

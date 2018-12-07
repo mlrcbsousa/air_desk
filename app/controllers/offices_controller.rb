@@ -43,7 +43,7 @@ class OfficesController < ApplicationController
     authorize @office
     @booking = Booking.new
     @reviews = @office.reviews
-    @office_attachments = @office.office_attachments.all
+    @office_attachments = @office.office_attachments
   end
 
   def edit
