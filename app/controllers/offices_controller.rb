@@ -16,9 +16,8 @@ class OfficesController < ApplicationController
     end
     @offices = policy_scope(offices).order(created_at: :desc)
 
-
     # @offices = Office.where.not(latitude: nil, longitude: nil)
-    @markers = @offices.map(&:set_marker)
+    # @markers = @offices.map(&:set_marker)
   end
 
   def new
