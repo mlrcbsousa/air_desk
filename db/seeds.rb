@@ -1,5 +1,6 @@
-#--- IMPORTANT ONLY SELECT THE ONES YOU NEED
-#--- Reseting DB (best to be in this order because of dependencies)
+
+# #--- Reseting DB (best to be in this order because of dependencies)
+
 # puts "Destroying all office attachments..."
 # OfficeAttachment.destroy_all
 # puts "Destroying all reviews..."
@@ -10,6 +11,7 @@
 # Office.destroy_all
 # puts "Destroying all users..."
 # User.destroy_all
+
 
 # #---- Generating Users
 
@@ -118,9 +120,10 @@ names = office_attachment_urls.map {|url| url[:office_name]}.uniq
   office.save!
 end
 
-puts "Generated #{Office.count} offices in the database!"
+# # # user.remote_avatar_url = "https://source.unsplash.com/collection/3107814/300x300/?sig=#{n + 1}"
 
-#--- Generating Bookings
+# puts "Generated #{User.count} users in the database!"
+
 
 300.times do
   Booking.create(
@@ -131,9 +134,14 @@ puts "Generated #{Office.count} offices in the database!"
   )
 end
 
-puts "Generated #{Booking.count} bookings in the database!"
 
-#--- Generating Reviews
+# locations = ["London", "Paris", "Berlin", "Lisbon", "Brussels", "Luxemburg", "Vienna", "Madrid", "Stockholm", "Milan"]
+# names = ["modern", "cool", "classic", "hipster", "traditional", "exciting", "clean",]
+# adjectives = ["amazing", "cheap", "high end", "fancy", "great value for money", "sophisticated", "alternative", "in demand", "unique", "pet friendly", "centrally located"]
+# descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+# office_attachment_urls = JSON.parse(File.read("office_attachment_cloudinary_urls.json"), symbolize_names: true)
+
 
 Booking.limit(200).each do |booking|
   booking.review = Review.new(
@@ -143,19 +151,33 @@ Booking.limit(200).each do |booking|
   booking.save
 end
 
-puts "Generated #{Review.count} reviews in the database!"
+# names = office_attachment_urls.map {|url| url[:office_name]}.uniq
 
-#--- Generating Office Attachments
+# 37.times do |n|
+#   office = Office.new(
+#     location: "#{Faker::Address.street_address} #{locations.sample}",
+#     name: names[n],
+#     # name: "#{adjectives.sample.upcase} #{names.sample} office",
+#     description: descriptions,
+#     capacity: rand(2..20),
+#     dayrate: rand(20..200),
+#     user: User.all.sample
+#   )
+#   office.save!
+# end
 
-127.times do |n|
-  office_attachment = OfficeAttachment.new
-  office_attachment.remote_attachment_url = office_attachment_urls[n][:cloudinary_url]
-  office_attachment.office = Office.find_by(name: office_attachment_urls[n][:office_name])
-  office_attachment.save
-end
+# puts "Generated #{Office.count} offices in the database!"
 
-puts "Generated #{OfficeAttachment.count} office attachments in the database!"
+# #--- Generating Bookings
 
+# 200.times do
+#   Booking.create(
+#     start_date: Date.new(2019,rand(1..6),rand(1..28)),
+#     end_date: Date.new(2019,rand(7..12),rand(1..30)),
+#     user: User.all.sample,
+#     office: Office.all.sample
+#   )
+# end
 
 # # #---- BONUS: GENERATE JSON WITH CLOUDINARY URLs from local db per OfficeAttachment::Office.name
 
@@ -187,3 +209,6 @@ puts "Generated #{OfficeAttachment.count} office attachments in the database!"
 # #   f.write(JSON.pretty_generate(array))
 # # end
 
+# # File.open('avatar_cloudinary_urls.json', 'w') do |f|
+# #   f.write(JSON.pretty_generate(array))
+# # end
