@@ -12,7 +12,7 @@ class Office < ApplicationRecord
 
   # Validations
   validates :city, :street, :name, :capacity, :dayrate, presence: true
-  validates :dayrate, :capacity, numericality: true
+  validates :dayrate, :capacity, numericality: { greater_than_or_equal_to: 0 }
   validates :capacity, inclusion: { in: (1..20) }
 
   validates :name, length: { in: 10..140 }
@@ -49,7 +49,11 @@ class Office < ApplicationRecord
     reviews.map(&:rating).sum / reviews.count
   end
 
-  def set_main
+  def blank_main
+    office_attachments.each { |office_attachment| office_attachment.update(main: false) }
+  end
+
+  def main
     office_attachments.select { |office_attachment| office_attachment.main == true }[0]
   end
 

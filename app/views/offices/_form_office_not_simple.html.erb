@@ -1,39 +1,62 @@
 <!-- _form_office_not_simple.html.erb -->
-
 <%= form_for(office, :html => { :multipart => true }) do |f| %>
-   <div class="field">
-     <%= f.label :name %><br>
-    <%= f.text_field :name %>
-   </div>
-   <div class="field">
-     <%= f.label :street %><br>
-     <%= f.text_field :street %>
-   </div>
-   <div class="field">
-     <%= f.label :city %><br>
-     <%= f.text_field :city %>
-   </div>
-   <div class="field">
-     <%= f.label :capacity %><br>
-     <%= f.number_field :capacity %>
-   </div>
-   <div class="field">
-     <%= f.label :description %><br>
-     <%= f.text_area :description %>
-   </div>
-   <div class="field">
-     <%= f.label :dayrate %><br>
-     <%= f.number_field :dayrate %>
-   </div>
+  <div class="field form-group">
+    <%= f.label :name, 'Office name', class: "control-label" %><br>
+    <%= f.text_field :name, required: true, class: "form-control" %>
+  </div>
 
-   <%= f.fields_for :office_attachments do |p| %>
-     <div class="field">
-       <%= p.label :attachment %><br>
-       <%= p.file_field :attachment, :multiple => true, name: "office_attachments[attachment][]" %>
-     </div>
-   <% end %>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="field form-group">
+        <%= f.label :street, 'Office street', class: "control-label" %><br>
+        <%= f.text_field :street, required: true, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="field form-group">
+        <%= f.label :city, 'Office city', class: "control-label" %><br>
+        <%= f.text_field :city, required: true, class: "form-control" %>
+      </div>
+    </div>
+  </div>
 
-   <div class="actions">
-     <%= f.submit %>
-   </div>
+  <div class="field form-group">
+    <%= f.label :description, 'Office description', class: "control-label" %><br>
+    <%= f.text_area :description, rows: 3, class: "form-control" %>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="field form-group">
+        <%= f.label :capacity, 'Office capacity', class: "control-label" %><br>
+        <%= f.number_field :capacity, required: true, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <div class="field form-group">
+        <%= f.label :dayrate, 'Office dayrate', class: "control-label" %><br>
+        <%= f.number_field :dayrate, required: true, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.fields_for :office_attachments do |p| %>
+    <div class="field form-group">
+      <%= p.label :attachment, class: "control-label" %><br>
+      <%= p.file_field :attachment, :multiple => true, name: "office_attachments[attachment][]" %>
+    </div>
+  <% end %>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="tos" id="tos" required>
+      I agree with the
+      <%= link_to 'terms of service', about_path %>
+    </label>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Become a Host!',class: "btn btn-primary" %>
+  </div>
 <% end %>

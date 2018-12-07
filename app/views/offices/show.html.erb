@@ -1,5 +1,5 @@
 <!-- app/views/offices/show.html.erb -->
-<div class="office" style="background-image: url(<%= cl_image_path @office.set_main.attachment.url unless @office.office_attachments.empty? %>)"></div>
+<div class="office" style="background-image: url(<%= cl_image_path @office.main.attachment.url unless @office.office_attachments.empty? %>)"></div>
 
 <!--  -->
 
@@ -36,7 +36,7 @@
         <!-- need this hidden for the javascript pricing -->
         <p id="dayrate"><%= @office.dayrate %></p>
         <p class="dayrate"><%= @office.format_dayrate %> € / day</p>
-        <p><%= "#{@office.street}, #{@office.city} - #{@office.capacity}" %> <i class="fas fa-user-friends"></i></p>
+        <p><%= "#{@office.address} - #{@office.capacity}" %> <i class="fas fa-user-friends"></i></p>
         <p>
           Average rating:
           <% if @office.avg_rating == 0 %>
