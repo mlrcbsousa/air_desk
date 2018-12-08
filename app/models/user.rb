@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  include PgSearch
+  multisearchable against: %i[email username first_name last_name]
+
   # Carrierwave
   mount_uploader :avatar, AvatarUploader
 
@@ -20,9 +23,6 @@ class User < ApplicationRecord
 
   # must be a-z or ' ' (case-insensitive)
   validates :first_name, :last_name, allow_blank: true, format: { with: /\A([a-z \'\.']+)\z/i }
-
-  include PgSearch
-  multisearchable against: %i[email username first_name last_name]
 
   def full_name
     "#{first_name.downcase.capitalize} #{last_name.downcase.capitalize}"

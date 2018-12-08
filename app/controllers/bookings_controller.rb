@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_office, only: [:create, :edit]
+  before_action :set_office, only: %i[create edit]
   before_action :set_booking, only: %i[edit update destroy]
 
   def create

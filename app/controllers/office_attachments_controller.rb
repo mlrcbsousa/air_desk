@@ -4,7 +4,7 @@ class OfficeAttachmentsController < ApplicationController
 
   def background
     authorize @office
-    @office.blank_main
+    @office.main!
     @office_attachment = OfficeAttachment.find(params[:office_attachment_id])
     @office_attachment.update(main: true)
     redirect_to office_path(@office), notice: 'Successfully changed your main Image!'

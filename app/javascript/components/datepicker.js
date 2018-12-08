@@ -1,7 +1,6 @@
 import flatpickr from 'flatpickr';
 import "flatpickr/dist/flatpickr.css";
 
-
 const parseDate = (string) => {
   const pattern = /(\d{2})-(\d{2})-(\d{4})/;
   return new Date(string.replace(pattern,'$3-$2-$1'));
@@ -34,15 +33,15 @@ const initDatepickers = function () {
       updatePrice(startDateinput.value, endDateinput.value);
     }
   });
-    const endDateCalendar =
-      flatpickr(endDateinput, {
-        dateFormat: 'd-m-Y',
-        onChange: function(_, selectedDate) {
-          updatePrice(startDateinput.value, endDateinput.value);
-        }
-      });
+
+  const endDateCalendar =
+    flatpickr(endDateinput, {
+      dateFormat: 'd-m-Y',
+      onChange: function(_, selectedDate) {
+        updatePrice(startDateinput.value, endDateinput.value);
+      }
+    });
   }
 };
 
 export { initDatepickers };
-

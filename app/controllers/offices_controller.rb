@@ -8,16 +8,13 @@ class OfficesController < ApplicationController
     @total = Office.count
     @query = params[:query]
     if @query.present?
-      # offices = Office.search_by_name_and_location(@query)
       offices = Office.global_search(@query)
       # results = PgSearch.multisearch(@query)
     else
       offices = Office.all
     end
     @offices = policy_scope(offices).order(created_at: :desc)
-
-    # @offices = Office.where.not(latitude: nil, longitude: nil)
-    # @markers = @offices.map(&:set_marker)
+    @markers = @offices.map(&:set_marker)
   end
 
   def new

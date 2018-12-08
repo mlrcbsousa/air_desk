@@ -1,4 +1,7 @@
 class Office < ApplicationRecord
+  include PgSearch
+  multisearchable against: %i[name city street]
+
   geocoded_by :address
   after_validation :geocode # if: :will_save_change_to_address?
 
@@ -12,14 +15,11 @@ class Office < ApplicationRecord
 
   # Validations
   validates :city, :street, :name, :capacity, :dayrate, presence: true
-  validates :dayrate, :capacity, numericality: { greater_than_or_equal_to: 0 }
+  validates :dayrate, :capacity, numericality: { greater_than_or_equal_to: 1 }
   validates :capacity, inclusion: { in: (1..20) }
 
   validates :name, length: { in: 10..140 }
   validates :name, :city, :street, allow_blank: false, format: { with: /\A([a-z 0-9\.\'\:\,']+)\z/i }
-
-  include PgSearch
-  multisearchable against: %i[name city street]
 
   # example
   pg_search_scope :search_by_name_and_city_and_street,
@@ -49,7 +49,7 @@ class Office < ApplicationRecord
     reviews.map(&:rating).sum / reviews.count
   end
 
-  def blank_main
+  def main!
     office_attachments.each { |office_attachment| office_attachment.update(main: false) }
   end
 
