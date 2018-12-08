@@ -46,7 +46,7 @@ class Office < ApplicationRecord
   def avg_rating
     return 0 if reviews.count.zero?
 
-    reviews.map(&:rating).sum / reviews.count
+    reviews.pluck(:rating).sum / reviews.count
   end
 
   def main!

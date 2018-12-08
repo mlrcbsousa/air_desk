@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   # Associations
   has_many :bookings
-  has_many :offices
+  has_many :offices, dependent: :destroy
 
   # Validations
   validates :username,

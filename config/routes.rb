@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     resources :office_attachments, except: %i[index show] do
       get 'background', to: 'office_attachments#background'
     end
-
   end
 
   root to: 'pages#home'

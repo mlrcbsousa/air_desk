@@ -1,4 +1,7 @@
 class Review < ApplicationRecord
+  include PgSearch
+  multisearchable against: :rating
+
   # Associations
   belongs_to :booking
   # guest = review.booking.user
@@ -6,7 +9,4 @@ class Review < ApplicationRecord
 
   # Validations
   validates :rating, presence: true, numericality: true, inclusion: { in: (0..5) }
-
-  include PgSearch
-  multisearchable against: [:rating]
 end
