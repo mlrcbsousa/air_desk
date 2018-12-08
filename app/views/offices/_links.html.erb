@@ -1,0 +1,16 @@
+<!-- _links.html.erb -->
+<% if type == 'edit' %>
+  <% if policy(office).edit? %>
+    <%= link_to edit_office_path(office) do %>
+      <i class="fas fa-pencil-alt"></i>
+    <% end %>
+  <% end %>
+<% elsif type == 'destroy' %>
+  <% if policy(office).destroy? %>
+    <%= link_to office_path(office),
+    method: :delete,
+    data: { confirm: "Are you sure?" } do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
+  <% end %>
+<% end %>

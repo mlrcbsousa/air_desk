@@ -19,11 +19,15 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    session[:previous_url] || request.referer || root_path
+    path_finder
   end
 
   def after_sign_out_path_for(resource)
     URI.parse(request.referer).path if request.referer
+  end
+
+  def path_finder
+    session[:previous_url] || request.referer || root_path
   end
 
   # Uncomment when you *really understand* Pundit!

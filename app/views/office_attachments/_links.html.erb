@@ -1,0 +1,27 @@
+<!-- _links.html.erb -->
+<% if type == 'edit' %>
+
+  <%= link_to edit_office_office_attachment_path(office_attachment.office, office_attachment) do %>
+    <i class="fas fa-pencil-alt"></i>
+  <% end %>
+
+<% elsif type == 'destroy' %>
+
+  <%= link_to office_office_attachment_path(office_attachment.office, office_attachment),
+    method: :delete,
+    data: { confirm: "Are you sure?" } do %>
+      <i class="far fa-trash-alt"></i>
+  <% end %>
+
+<% elsif type == 'background' %>
+
+  <%= link_to 'Make background', office_office_attachment_background_path(office_attachment.office, office_attachment) %>
+
+<% elsif type == 'new' %>
+
+  <%= link_to new_office_booking_review_path(booking.office, booking) do %>
+    <button type="button" class="btn btn-outline-primary">Write a review</button>
+  <% end %>
+
+<% end -%>
+

@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
     authorize @review.booking
     @review.update(params_review)
     if @review.save
-      redirect_to dashboard_path, notice: 'Review was successfully updated.'
+      redirect_to path_finder, notice: 'Review was successfully updated.'
     else
       render :edit, alert: 'Unable to update review.'
     end
@@ -36,7 +36,7 @@ class ReviewsController < ApplicationController
   def destroy
     authorize @review.booking
     @review.destroy
-    redirect_to dashboard_path, notice: 'Review was successfully deleted.'
+    redirect_to path_finder, notice: 'Review was successfully deleted.'
   end
 
   private

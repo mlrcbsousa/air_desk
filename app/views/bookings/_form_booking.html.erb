@@ -3,8 +3,10 @@
   <%= f.input :start_date, as: :string %>
   <%= f.input :end_date, as: :string %>
   <p>
+    <!-- need this hidden for the javascript pricing -->
+    <span id="dayrate" style="display: none;"><%= office.dayrate %></span>
     <strong>Price:</strong>
     <span id="total-price"></span>
   </p>
-  <%= f.submit 'Book Now', class: 'btn btn-default' %>
+  <%= f.submit ('Book Now' if current_page?(office_path(office))), class: 'btn btn-default' %>
 <% end %>

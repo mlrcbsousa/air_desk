@@ -1,0 +1,6 @@
+<!-- _links.html.erb -->
+<% if type == 'new' %>
+  <%= link_to new_office_booking_review_path(booking.office, booking) do %>
+    <button type="button" class="btn btn-outline-primary">Write a review</button>
+  <% end %>
+<% end %>

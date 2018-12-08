@@ -1,19 +1,13 @@
 <!-- _office.attachment.html.erb -->
-  <div class="offices-pictures" style="background-image: url(<%= cl_image_path office_attachment.attachment %>);" ba>
-    <%= cl_image_tag office_attachment.attachment.url %>
-    <% if policy(office_attachment.office).edit? %>
-      <%= link_to edit_office_office_attachment_path(office_attachment.office, office_attachment) do %>
-        <i class="fas fa-pencil-alt"></i>
-      <% end %>
-    <% end %>
+<div class="col-xs-6 col-sm-4">
+  <%= cl_image_tag office_attachment.attachment %>
 
-    <% if policy(office_attachment.office).destroy? %>
-      <%= link_to office_office_attachment_path(office_attachment.office, office_attachment),
-      method: :delete,
-      data: { confirm: "Are you sure?" } do %>
-        <i class="far fa-trash-alt"></i>
-      <% end %>
-    <% end %>
+  <% if current_user == office_attachment.office.user %>
+    <ul class="list-inline">
+      <li><%= render 'office_attachments/links', office_attachment: office_attachment, type: 'edit' %></li>
+      <li><%= render 'office_attachments/links', office_attachment: office_attachment, type: 'destroy' %></li>
+      <li><%= render 'office_attachments/links', office_attachment: office_attachment, type: 'background' %></li>
+    </ul>
+  <% end %>
 
-  </div>
-
+</div>

@@ -4,8 +4,11 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <div class="office-show-card">
-          <h1>New Office</h1>
-          <%= render 'form_office_not_simple', office: @office %>
+          <h1>
+            New Office
+            <%= render 'shared/links', type: 'back' %>
+          </h1>
+          <%= render 'form_office', office: @office %>
         </div>
       </div>
     </div>

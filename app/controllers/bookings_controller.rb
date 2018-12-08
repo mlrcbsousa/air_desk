@@ -35,7 +35,7 @@ class BookingsController < ApplicationController
   def destroy
     authorize @booking
     @booking.destroy
-    redirect_to dashboard_path, notice: 'Booking was successfully deleted.'
+    redirect_to path_finder, notice: 'Booking was successfully deleted.'
   end
 
   private

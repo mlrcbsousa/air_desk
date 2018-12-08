@@ -1,12 +1,26 @@
 <!-- app/views/offices/index.html.erb -->
 <div class="container">
-  <div class="index-title">
-    <h1 class="text-primary">All our offices</h1>
-    <% if @query %>
-      <p>You searched for <em class="text-primary">"<%= @query %>"</em>.. We found <strong class="text-primary"><%= @offices.count %></strong> offices out of <strong><%= @total %></strong> on our website.</p>
-    <% end %>
-  </div>
   <div class="row">
-    <%= render @offices %>
+    <div class="col-xs-12 col-sm-7">
+      <div class="index min-height" style="height: calc(100vh - 170px);">
+        <div class="index-title">
+          <h1 class="text-primary">All our offices</h1>
+          <% if @query %>
+            <p>You searched for <em class="text-primary">"<%= @query %>"</em>.. We found <strong class="text-primary"><%= @offices.count %></strong> offices out of <strong><%= @total %></strong> on our website.</p>
+          <% end %>
+        </div>
+        <%= render @offices %>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-5">
+      <div
+        class="min-height"
+        id="map"
+        style="width: 100%;
+        position: sticky;"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+        ></div>
+    </div>
   </div>
 </div>

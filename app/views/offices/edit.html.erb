@@ -6,11 +6,9 @@
         <div class="office-show-card">
           <h1>
             Edit Office
-            <%= link_to @office do %>
-              <i class="fas fa-undo-alt"></i>
-            <% end %>
+            <%= render 'shared/links', type: 'back' %>
           </h1>
-          <%= render 'form_office_not_simple', office: @office %>
+          <%= render 'form_office', office: @office %>
         </div>
       </div>
     </div>

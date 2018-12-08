@@ -2,23 +2,10 @@
 <div class="col-xs-12 col-sm-4">
   <div class="cardbooking">
 
-    <div class="cardbooking-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path booking.office.office_attachments.first.attachment.url unless booking.office.office_attachments.empty? %>)">
+    <div class="cardbooking-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path booking.office.main.attachment.url unless booking.office.office_attachments.empty? %>)">
       <h4><%= booking.office.name %></h4>
-
-      <% if policy(booking).edit? %>
-        <%= link_to edit_office_booking_path(booking.office, booking) do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
-      <% end %>
-      <% if policy(booking).destroy? %>
-        <%= link_to office_booking_path(booking.office, booking),
-        method: :delete,
-        data: { confirm: "Are you sure?" } do %>
-          <i class="far fa-trash-alt"></i>
-        <% end %>
-      <% end %>
-
-
+      <%= render 'bookings/links', booking: booking, type: 'edit' %>
+      <%= render 'bookings/links', booking: booking, type: 'destroy' %>
     </div>
 
     <div class="cardbooking-description">
@@ -27,31 +14,32 @@
         <p><%= booking.office.city %></p>
         <p>Total time: <%= (booking.end_date - booking.start_date).to_i %> Days</p>
       </div>
-
       <div class="cardbooking-user">
         <%= image_tag booking.office.user.avatar.url, class: "card-user" %>
       </div>
-
       <div class="dates-info">
         <p>From: <%= booking.start_date.strftime("%a, %-d %b %Y") %></p>
         <p>To: <%= booking.end_date.strftime("%a, %-d %b %Y") %></p>
       </div>
-
       <div class="office-link">
-        <p><%= link_to office_path(booking.office) do %>
-          <i class="fas fa-search"></i> See the office
-          <% end %></p>
+        <p>
+
+          <%= link_to office_path(booking.office) do %>
+            <i class="fas fa-search"></i> See the office
+          <% end %>
+
+        </p>
       </div>
 
       <div class="booking-review">
         <h5>Review:</h5>
           <p>
             <% if booking.review %>
-            <%= render 'reviews/review', review: booking.review %>
+              <%= render 'reviews/review', review: booking.review %>
             <% elsif %>
-              <%= link_to new_office_booking_review_path(booking.office, booking) do %>
-                  <button type="button" class="btn btn-outline-primary">Write a review</button>
-                <% end %>
+              <!-- if @office.bookings.select { |booking| booking.user == current_user }.present? -->
+                <!-- render 'reviews/links', type: 'new', booking: @office.bookings.select { |booking| booking.user == current_user } -->
+              <%= render 'reviews/links', type: 'new', booking: booking %>
             <% end %>
           </p>
       </div>

@@ -1,5 +1,5 @@
 <!-- views/offices/_office.html.erb -->
-<div class="col-xs-12 col-sm-4">
+<div class="col-xs-12 col-sm-6">
   <div class="card">
     <div class="card-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path office.main.attachment.url unless office.office_attachments.empty? %>)">
 
@@ -10,24 +10,10 @@
       <div class="card-info">
         <h3>
           <%= office.format_dayrate %> €
-
-          <!-- links to edit and delete -->
-          <% if policy(office).edit? %>
-            <%= link_to edit_office_path(office) do %>
-              <i class="fas fa-pencil-alt"></i>
-            <% end %>
-          <% end %>
-          <% if policy(office).destroy? %>
-            <%= link_to office_path(office),
-            method: :delete,
-            data: { confirm: "Are you sure?" } do %>
-              <i class="far fa-trash-alt"></i>
-            <% end %>
-          <% end %>
+          <%= render 'offices/links', office: office, type: 'edit' %>
+          <%= render 'offices/links', office: office, type: 'destroy' %>
         </h3>
-
         <p><%= office.city %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
-
       </div>
       <div class="card-cup-ratings">
         <% unless office.avg_rating == 0 %>

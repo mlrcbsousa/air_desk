@@ -1,0 +1,20 @@
+<!-- bookings/_links.html.erb -->
+<% if type == 'edit' %>
+
+  <% if policy(booking).edit? %>
+    <%= link_to edit_office_booking_path(booking.office, booking) do %>
+      <i class="fas fa-pencil-alt"></i>
+    <% end %>
+  <% end %>
+
+<% elsif type == 'destroy' %>
+
+  <% if policy(booking).destroy? %>
+    <%= link_to office_booking_path(booking.office, booking),
+        method: :delete,
+        data: { confirm: "Are you sure?" } do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
+  <% end %>
+
+<% end -%>

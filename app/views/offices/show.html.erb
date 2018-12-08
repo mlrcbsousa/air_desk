@@ -33,16 +33,14 @@
         <div class="user-avatar">
           <%= image_tag @office.user.avatar.url, width: 80, class: "img-circle" %>
         </div>
-        <!-- need this hidden for the javascript pricing -->
-        <p id="dayrate"><%= @office.dayrate %></p>
         <p class="dayrate"><%= @office.format_dayrate %> € / day</p>
         <p><%= "#{@office.address} - #{@office.capacity}" %> <i class="fas fa-user-friends"></i></p>
         <p>
           Average rating:
           <% if @office.avg_rating == 0 %>
-          <span class="no-rating">This office hasn't been rated yet!</span>
+            <span class="no-rating">This office hasn't been rated yet!</span>
           <% elsif %>
-          <%= render 'shared/rating', office: @office %>
+            <%= render 'shared/rating', office: @office %>
           <% end %>
         </p>
         <p><%= @office.description %></p>
@@ -50,7 +48,8 @@
 
       <div class="office-show-card gallery">
         <h3>Gallery:
-          <!-- links to add office attachments -->
+          <!-- link to add office attachments -->
+
           <% if current_user == @office.user %>
             <% if policy(@office).create? %>
               <%= link_to new_office_office_attachment_path(@office) do %>
@@ -58,39 +57,11 @@
               <% end %>
             <% end %>
           <% end %>
+
         </h3>
         <div class="offices-picture">
           <div class="row">
-
-            <% @office_attachments.each do |office_attachment| %>
-              <div class="col-xs-6 col-sm-4">
-                <%= cl_image_tag office_attachment.attachment %>
-
-                <% if current_user == @office.user %>
-                  <ul class="list-inline">
-                    <li>
-                      <%= link_to edit_office_office_attachment_path(office_attachment.office, office_attachment) do %>
-                        <i class="fas fa-pencil-alt"></i>
-                      <% end %>
-                    </li>
-
-                    <li>
-                      <%= link_to office_office_attachment_path(office_attachment.office, office_attachment),
-                        method: :delete,
-                        data: { confirm: "Are you sure?" } do %>
-                          <i class="far fa-trash-alt"></i>
-                      <% end %>
-                    </li>
-
-                    <li>
-                      <%= link_to 'Make background', office_office_attachment_background_path(office_attachment.office, office_attachment) %>
-                    </li>
-                  </ul>
-                <% end %>
-
-              </div>
-            <% end %>
-
+            <%= render @office_attachments %>
           </div>
         </div>
       </div>
@@ -119,9 +90,7 @@
           height: 400px;"
           data-markers="<%= @markers.to_json %>"
           data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-          >
-
-        </div>
+          ></div>
       </div>
     </div>
 
