@@ -7,10 +7,10 @@
     </div>
   <% end %>
   <div class="review-rating">
-    <%= render 'shared/rating', rating: review.rating %>-
+    <%= render 'shared/rating', rating: review.rating %>
     <span><%= review.created_at.strftime("%a, %-d %b %Y (at %-I:%M%P)") %></span>
-    <%= render 'reviews/links', review: review, type: 'edit' %>-
-    <%= render 'reviews/links', review: review, type: 'destroy' %>-
+    <%= render 'reviews/links', review: review, type: 'edit' %>
+    <%= render 'reviews/links', review: review, type: 'destroy' %>
   </div>
   <div class="review-body">
     <p><%= review.content %></p>
