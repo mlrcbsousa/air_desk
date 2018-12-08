@@ -3,4 +3,18 @@
   <%= link_to new_office_booking_review_path(booking.office, booking) do %>
     <button type="button" class="btn btn-outline-primary">Write a review</button>
   <% end %>
+<% elsif type == 'edit' %>
+  <% if policy(review.booking).edit? %>
+    <%= link_to edit_office_booking_review_path(review.booking.office, review.booking, review) do %>
+      <i class="fas fa-pencil-alt"></i>
+    <% end %>
+  <% end %>
+<% elsif type == 'destroy' %>
+  <% if policy(review.booking).destroy? %>
+    <%= link_to office_booking_review_path(review.booking.office, review.booking, review),
+    method: :delete,
+    data: { confirm: "Are you sure?" } do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
+  <% end %>
 <% end %>

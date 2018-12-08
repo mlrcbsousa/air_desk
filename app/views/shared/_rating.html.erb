@@ -1,8 +1,8 @@
 <span class="review-rating">
-  <% office.avg_rating.times do %>
+  <% rating.times do %>
     <i class="fas fa-coffee active"></i>
   <% end %>
-  <% (5 - office.avg_rating).times do %>
+  <% (5 - rating).times do %>
     <i class="fas fa-coffee inactive"></i>
   <% end %>
 </span>

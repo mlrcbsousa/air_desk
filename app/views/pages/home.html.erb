@@ -27,9 +27,7 @@
         <div class="feature-card text-center">
           <h3 class="text-primary">Accessible</h3>
           <br>
-          <div>
-            <%= image_tag 'wind.svg', height: 150 %>
-          </div>
+          <div><%= image_tag 'wind.svg', height: 150 %></div>
           <br>
           <span>Need to work somewhere? Can't find a place to focus?</span>
         </div>
@@ -39,9 +37,7 @@
         <div class="feature-card text-center">
           <h3 class="text-primary">Intuitive</h3>
           <br>
-          <div>
-            <%= image_tag 'monitor.svg', height: 150 %>
-          </div>
+          <div><%= image_tag 'monitor.svg', height: 150 %></div>
           <br>
           <span>Book fast and clean, no hassle, no bother</span>
         </div>
@@ -51,14 +47,10 @@
         <div class="feature-card text-center">
           <h3 class="text-primary">Pleasing</h3>
           <br>
-          <div>
-            <%= image_tag 'coffee.svg', height: 150 %>
-          </div>
+          <div><%= image_tag 'coffee.svg', height: 150 %></div>
           <br>
           <span>Have coffee while working and not having to worry, maybe <strong class="text-primary">
-            <% if policy(Office).create? %>
-              <%= link_to "become a host", new_office_path %>
-            <% end %>
+          <%= render 'offices/links', type: 'new', klass: '' %>
           </strong></span>
         </div>
       </div>

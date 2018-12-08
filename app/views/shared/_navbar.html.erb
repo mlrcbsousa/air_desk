@@ -6,9 +6,8 @@
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
     <%= render 'shared/search' %>
-    <% if policy(Office).create? %>
-      <%= link_to "Become a host", new_office_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <% end %>
+    <%= render 'offices/links', type: 'new', klass: "navbar-wagon-item navbar-wagon-link" %>
+
     <% if user_signed_in? %>
       <!-- Links when logged in -->
       <%= link_to "Dashboard", "/dashboard", class: "navbar-wagon-item navbar-wagon-link" %>

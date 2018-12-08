@@ -19,8 +19,12 @@
 
 <% elsif type == 'new' %>
 
-  <%= link_to new_office_booking_review_path(booking.office, booking) do %>
-    <button type="button" class="btn btn-outline-primary">Write a review</button>
+  <% if current_user == office.user %>
+    <% if policy(office).create? %>
+     <%= link_to new_office_office_attachment_path(office) do %>
+       <i class="fas fa-plus"></i>
+     <% end %>
+    <% end %>
   <% end %>
 
 <% end -%>

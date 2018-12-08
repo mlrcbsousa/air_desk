@@ -1,31 +1,16 @@
 <!-- app/views/offices/show.html.erb -->
 <div class="office" style="background-image: url(<%= cl_image_path @office.main.attachment.url unless @office.office_attachments.empty? %>)"></div>
-
 <!--  -->
-
 <div class="container margin-top-negative">
   <div class="row">
     <div class="office-show-info col-xs-12 col-sm-8">
       <div class="office-show-card office-show-name">
         <h2>
           <%= @office.name %>
-
           <!-- links to edit delete office if you host it -->
-          <% if policy(@office).edit? %>
-          <%= link_to edit_office_path(@office) do %>
-          <i class="fas fa-pencil-alt icon"></i>
-          <% end %>
-          <% end %>
-          <% if policy(@office).destroy? %>
-          <%= link_to office_path(@office),
-          method: :delete,
-          data: { confirm: "Are you sure?" } do %>
-          <i class="far fa-trash-alt icon"></i>
-          <% end %>
-          <% end %>
-          <%= link_to offices_path do %>
-          <i class="fas fa-undo-alt icon"></i>
-          <% end %>
+          <%= render 'shared/links', type: 'index' %>
+          <%= render 'offices/links', office: @office, type: 'edit' %>
+          <%= render 'offices/links', office: @office, type: 'destroy' %>
         </h2>
       </div>
       <div class="office-show-card office-details">
@@ -40,7 +25,7 @@
           <% if @office.avg_rating == 0 %>
             <span class="no-rating">This office hasn't been rated yet!</span>
           <% elsif %>
-            <%= render 'shared/rating', office: @office %>
+            <%= render 'shared/rating', rating: @office.avg_rating %>
           <% end %>
         </p>
         <p><%= @office.description %></p>
@@ -48,16 +33,7 @@
 
       <div class="office-show-card gallery">
         <h3>Gallery:
-          <!-- link to add office attachments -->
-
-          <% if current_user == @office.user %>
-            <% if policy(@office).create? %>
-              <%= link_to new_office_office_attachment_path(@office) do %>
-                <i class="fas fa-plus"></i>
-              <% end %>
-            <% end %>
-          <% end %>
-
+          <%= render 'office_attachments/links', office: @office, type: 'new' %>
         </h3>
         <div class="offices-picture">
           <div class="row">
