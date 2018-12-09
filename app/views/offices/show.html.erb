@@ -20,12 +20,13 @@
         </div>
         <p class="dayrate"><%= @office.format_dayrate %> € / day</p>
         <p><%= "#{@office.address} - #{@office.capacity}" %> <i class="fas fa-user-friends"></i></p>
-        <p>
-          Average rating:
+        <p>Average rating:
           <% if @office.avg_rating == 0 %>
             <span class="no-rating">This office hasn't been rated yet!</span>
           <% elsif %>
-            <%= render 'shared/rating', rating: @office.avg_rating %>
+            <span class="office-rating">
+              <%= render 'shared/rating', rating: @office.avg_rating %>
+            </span>
           <% end %>
         </p>
         <p><%= @office.description %></p>

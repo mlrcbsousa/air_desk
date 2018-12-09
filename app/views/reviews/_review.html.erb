@@ -3,16 +3,21 @@
   <% unless current_page?(dashboard_path) %>
     <div class="review-created-at">
       <%= cl_image_tag review.booking.user.avatar.url, class: "img-circle", width: 40 %>
-      <p></p>
     </div>
   <% end %>
-  <div class="review-rating">
-    <%= render 'shared/rating', rating: review.rating %>
-    <span><%= review.created_at.strftime("%a, %-d %b %Y (at %-I:%M%P)") %></span>
-    <%= render 'reviews/links', review: review, type: 'edit' %>
-    <%= render 'reviews/links', review: review, type: 'destroy' %>
-  </div>
-  <div class="review-body">
-    <p><%= review.content %></p>
+  <div>
+    <div>
+      <span class="review-rating">
+        <%= render 'shared/rating', rating: review.rating %>
+      </span>
+      <span class="review-date">
+        <%= review.created_at.strftime("%a, %-d %b %Y (at %-I:%M%P)") %>
+        <%= render 'reviews/links', review: review, type: 'edit' %>
+        <%= render 'reviews/links', review: review, type: 'destroy' %>
+      </span>
+    </div>
+    <div class="review-body">
+      <p><%= review.content %></p>
+    </div>
   </div>
 </div>

@@ -49,6 +49,16 @@ class Office < ApplicationRecord
     reviews.pluck(:rating).sum / reviews.count
   end
 
+  def self.top_rated(size)
+    offices = select('offices.id, avg(reviews.rating) avg')
+              .joins(:reviews)
+              .group('offices.id')
+              .order('avg desc')
+              .limit(size)
+    offices.map { |office| Office.find(office.id) }
+    # all.sort_by(&:avg_rating).reverse[0..(size - 1)]
+  end
+
   def main!
     office_attachments.each { |office_attachment| office_attachment.update(main: false) }
   end

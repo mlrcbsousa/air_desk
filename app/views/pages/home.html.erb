@@ -12,8 +12,12 @@
   <!-- end of button -->
   <div class="banner-content">
     <%= image_tag 'airdnc-white.png' %>
-    <p>[EVERYTHING you need - a desk & unlimited coffees]</p>
-    <%= render 'shared/search' %>
+    <p>[ Find a Desk, drink Coffee ]</p>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <%= render 'shared/search' %>
+      </div>
+    </div>
     <br>
     <%= link_to 'Discover our Offices', offices_path, class: "btn btn-primary" %>
   </div>

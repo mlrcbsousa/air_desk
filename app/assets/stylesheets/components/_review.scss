@@ -1,29 +1,18 @@
 .review {
   padding: 0px;
-  &:last-child {
-    border-bottom: none;
+  display: flex;
+  padding-top: 10px;
+  font-size: 14px;
+  border-top: 1px solid $light-gray;
+  img {
+    margin: 5px 10px;
   }
-}
-.review-rating {
-  font-size: 12px;
-  font-weight: bold;
-  .active,
-  .inactive {
-    text-shadow: 1px 1px 2px $light-gray;
-  }
-  .active {
-    color: $blue;
-  }
-  .inactive {
-    color: $light-gray;
-  }
-  span {
+  .review-date {
     margin-left: 5px;
     color: $gray;
-    opacity: 0.5;
+  }
+  .review-rating {
   }
 }
 
-.review-body {
-  font-size: 10px;
-}
+

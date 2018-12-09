@@ -4,44 +4,39 @@
 
     <div class="cardbooking-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path booking.office.main.attachment.url unless booking.office.office_attachments.empty? %>)">
       <h4><%= booking.office.name %></h4>
-      <%= render 'bookings/links', booking: booking, type: 'edit' %>
-      <%= render 'bookings/links', booking: booking, type: 'destroy' %>
     </div>
 
     <div class="cardbooking-description">
       <div class="card-info">
-        <h3><%= booking.format_price %> €</h3>
-        <p><%= booking.office.city %></p>
-        <p>Total time: <%= (booking.end_date - booking.start_date).to_i %> Days</p>
+        <h3>
+          <%= booking.format_price %> €
+          <%= render 'bookings/links', booking: booking, type: 'edit' %>
+          <%= render 'bookings/links', booking: booking, type: 'destroy' %>
+        </h3>
+        <p>
+          <%= booking.office.city %>
+          - for <%= (booking.end_date - booking.start_date).to_i %> Days
+        </p>
       </div>
       <div class="cardbooking-user">
         <%= image_tag booking.office.user.avatar.url, class: "card-user" %>
       </div>
       <div class="dates-info">
-        <p>From: <%= booking.start_date.strftime("%a, %-d %b %Y") %></p>
-        <p>To: <%= booking.end_date.strftime("%a, %-d %b %Y") %></p>
+        <p>From: <%= booking.start_date.strftime("%a, %-d %b %Y") %>
+         - To: <%= booking.end_date.strftime("%a, %-d %b %Y") %></p>
       </div>
-      <div class="office-link">
-        <p>
-
-          <%= link_to office_path(booking.office) do %>
-            <i class="fas fa-search"></i> See the office
-          <% end %>
-
-        </p>
-      </div>
-
       <div class="booking-review">
-        <h5>Review:</h5>
-          <p>
-            <% if booking.review %>
-              <%= render 'reviews/review', review: booking.review %>
-            <% elsif %>
-              <!-- if @office.bookings.select { |booking| booking.user == current_user }.present? -->
-                <!-- render 'reviews/links', type: 'new', booking: @office.bookings.select { |booking| booking.user == current_user } -->
-              <%= render 'reviews/links', type: 'new', booking: booking %>
-            <% end %>
-          </p>
+        <h5>
+          Review:
+          <%= render 'offices/links', type: 'show', office: booking.office %>
+        </h5>
+        <p>
+          <% if booking.review %>
+            <%= render 'reviews/review', review: booking.review %>
+          <% elsif %>
+            <%= render 'reviews/links', type: 'new', booking: booking %>
+          <% end %>
+        </p>
       </div>
 
     </div>

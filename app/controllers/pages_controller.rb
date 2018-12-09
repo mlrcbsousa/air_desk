@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def home
-    @offices = Office.all.sort_by(&:avg_rating).reverse[0..5]
+    @offices = Office.top_rated(6)
   end
 
   def about
