@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
     @office_attachments = @office.office_attachments
     # backend javascript check render 'offices/show' if booking.price != booking.set_price
     if @booking.user == @booking.office.user
-      redirect_to office_path(@office), alert: 'You can not book your own office!'
+      redirect_to @office, alert: 'You can not book your own office!'
     elsif @booking.save
       redirect_to dashboard_path, notice: 'Booking successfully created.'
     else

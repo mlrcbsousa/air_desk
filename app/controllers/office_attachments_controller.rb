@@ -7,7 +7,7 @@ class OfficeAttachmentsController < ApplicationController
     @office.main!
     @office_attachment = OfficeAttachment.find(params[:office_attachment_id])
     @office_attachment.update(main: true)
-    redirect_to office_path(@office), notice: 'Successfully changed your main Image!'
+    redirect_to @office, notice: 'Successfully changed your main Image!'
   end
 
   def new
@@ -22,7 +22,7 @@ class OfficeAttachmentsController < ApplicationController
 
     if @office_attachment.save
       @office_attachments = @office.office_attachments
-      redirect_to office_path(@office), notice: 'Successfully added Photo to your Office!'
+      redirect_to @office, notice: 'Successfully added Photo to your Office!'
     else
       render :new, alert: 'Unable to add your photo.'
     end
@@ -44,7 +44,7 @@ class OfficeAttachmentsController < ApplicationController
   def destroy
     authorize @office
     @office_attachment.destroy
-    redirect_to office_path(@office), notice: 'Image was successfully deleted.'
+    redirect_to @office, notice: 'Image was successfully deleted.'
   end
 
   private

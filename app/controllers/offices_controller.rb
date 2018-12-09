@@ -13,7 +13,18 @@ class OfficesController < ApplicationController
       offices = Office.all
     end
     @offices = policy_scope(offices).order(created_at: :desc)
-    @markers = @offices.map(&:set_marker)
+    @markers = @offices.map { |office| get_window(office) }
+  end
+
+  def get_window(office)
+    marker = office.set_marker
+    marker[:infoWindow] = {
+      content: render_to_string(
+        partial: "/offices/map_window",
+        locals: { office: office }
+      )
+    }
+    marker
   end
 
   def new
@@ -48,13 +59,14 @@ class OfficesController < ApplicationController
 
   def edit
     authorize @office
+    session[:office_previous_url] = request.referer
   end
 
   def update
     authorize @office
     @office.update(params_office)
     if @office.save
-      redirect_to @office, notice: 'Office was successfully updated.'
+      redirect_to session[:office_previous_url], notice: 'Office was successfully updated.'
     else
       render :edit, alert: 'Unable to update office.'
     end

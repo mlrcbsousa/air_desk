@@ -6,31 +6,5 @@
     col-sm-4
   <% end %>
   ">
-  <div class="card">
-    <div class="card-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path office.main.attachment.url unless office.office_attachments.empty? %>)">
-
-      <h4><%= office.name %></h4>
-      <%= link_to '', office_path(office), class: 'card-link' %>
-    </div>
-    <div class="card-description">
-      <div class="card-info">
-        <h3>
-          <%= office.format_dayrate %> €
-          <%= render 'offices/links', office: office, type: 'edit' %>
-          <%= render 'offices/links', office: office, type: 'destroy' %>
-        </h3>
-        <p><%= office.city %> | <%= office.capacity  %> <i class="fas fa-user-friends"></i></p>
-      </div>
-      <div class="card-cup-ratings">
-        <% unless office.avg_rating == 0 %>
-          <%= render 'shared/rating', rating: office.avg_rating %>
-        <% end %>
-      </div>
-      <% unless current_page?(dashboard_path) %>
-        <div class="card-user">
-          <%= image_tag office.user.avatar.url, class: "card-user" %>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'offices/map_window', office: office %>
 </div>

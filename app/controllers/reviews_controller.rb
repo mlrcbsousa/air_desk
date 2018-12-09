@@ -21,13 +21,14 @@ class ReviewsController < ApplicationController
 
   def edit
     authorize @review.booking
+    session[:review_previous_url] = request.referer
   end
 
   def update
     authorize @review.booking
     @review.update(params_review)
     if @review.save
-      redirect_to path_finder, notice: 'Review was successfully updated.'
+      redirect_to session[:review_previous_url], notice: 'Review was successfully updated.'
     else
       render :edit, alert: 'Unable to update review.'
     end
