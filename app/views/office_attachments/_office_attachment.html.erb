@@ -1,5 +1,5 @@
 <!-- _office.attachment.html.erb -->
-<div class="col-xs-6 col-sm-4">
+<div class="col-xs-6 col-sm-4" data-office_attachment-id="<%= office_attachment.id %>">
   <%= cl_image_tag office_attachment.attachment %>
 
   <% if current_user == office_attachment.office.user %>

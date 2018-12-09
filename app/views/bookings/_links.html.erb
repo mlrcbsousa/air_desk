@@ -11,6 +11,7 @@
 
   <% if policy(booking).destroy? %>
     <%= link_to office_booking_path(booking.office, booking),
+        remote: true,
         method: :delete,
         data: { confirm: "Are you sure?" } do %>
       <i class="far fa-trash-alt"></i>

@@ -1,5 +1,5 @@
 <!-- views/bookings/_booking.html.erb -->
-<div class="col-xs-12 col-sm-4">
+<div class="col-xs-12 col-sm-4" data-booking-id="<%= booking.id %>">
   <div class="cardbooking">
 
     <div class="cardbooking-pictures" style="background-image: linear-gradient(-225deg, rgba(120,97,97,0.5) 0%, rgba(155,197,193,0.2) 50%), url(<%= cl_image_path booking.office.main.attachment.url unless booking.office.office_attachments.empty? %>)">
@@ -25,18 +25,18 @@
         <p>From: <%= booking.start_date.strftime("%a, %-d %b %Y") %>
          - To: <%= booking.end_date.strftime("%a, %-d %b %Y") %></p>
       </div>
-      <div class="booking-review">
+      <div class="booking-review" id="booking-review-<%= booking.id %>">
         <h5>
           Review:
           <%= render 'offices/links', type: 'show', office: booking.office %>
         </h5>
-        <p>
+            <!-- <span id="reviews-<%= booking.id %>"> -->
           <% if booking.review %>
             <%= render 'reviews/review', review: booking.review %>
           <% elsif %>
-            <%= render 'reviews/links', type: 'new', booking: booking %>
+              <%= render 'reviews/links', type: 'new', booking: booking %>
           <% end %>
-        </p>
+            <!-- </span> -->
       </div>
 
     </div>

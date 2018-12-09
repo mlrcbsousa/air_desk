@@ -1,5 +1,5 @@
 <!-- views/components/_review.html.erb -->
-<div class="review">
+<div class="review" data-review-id="<%= review.id %>">
   <% unless current_page?(dashboard_path) %>
     <div class="review-created-at">
       <%= cl_image_tag review.booking.user.avatar.url, class: "img-circle", width: 40 %>

@@ -37,6 +37,10 @@ class ReviewsController < ApplicationController
   def destroy
     authorize @review.booking
     @review.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to path_finder, notice: 'Review was successfully deleted.' }
+    #   format.js
+    # end
     redirect_to path_finder, notice: 'Review was successfully deleted.'
   end
 

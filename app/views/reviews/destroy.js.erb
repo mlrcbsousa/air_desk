@@ -1,0 +1,13 @@
+// app/views/reviews/destroy.js.erb
+const addReviewButton = (reviewHTML) => {
+  const reviews = document.getElementById('reviews-<%= @booking.id %>');
+  reviews.innerHTML = reviewHTML;
+}
+
+
+<% if @review %>
+  addReviewButton('<%= j render "reviews/links", type: "new", booking: @booking %>');
+  document.querySelector("[data-review-id='<%= @review.id %>']").remove();
+<% else %>
+  document.querySelector("[data-review-id='<%= @review.id %>']").remove();
+<% end %>

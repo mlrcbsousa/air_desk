@@ -44,7 +44,10 @@ class OfficeAttachmentsController < ApplicationController
   def destroy
     authorize @office
     @office_attachment.destroy
-    redirect_to @office, notice: 'Image was successfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to @office, notice: 'Image was successfully deleted.' }
+      format.js
+    end
   end
 
   private

@@ -1,6 +1,7 @@
 class OfficesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_office, only: %i[show edit update destroy]
+  after_action :set_office_previous_url, only: %i[new edit]
   layout 'map', only: %i[index show]
 
   def index
@@ -14,17 +15,6 @@ class OfficesController < ApplicationController
     end
     @offices = policy_scope(offices).order(created_at: :desc)
     @markers = @offices.map { |office| get_window(office) }
-  end
-
-  def get_window(office)
-    marker = office.set_marker
-    marker[:infoWindow] = {
-      content: render_to_string(
-        partial: "/offices/map_window",
-        locals: { office: office }
-      )
-    }
-    marker
   end
 
   def new
@@ -59,7 +49,6 @@ class OfficesController < ApplicationController
 
   def edit
     authorize @office
-    session[:office_previous_url] = request.referer
   end
 
   def update
@@ -75,7 +64,10 @@ class OfficesController < ApplicationController
   def destroy
     authorize @office
     @office.destroy
-    redirect_to dashboard_path, notice: 'Office was successfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to session[:office_previous_url], notice: 'Office was successfully deleted.' }
+      format.js
+    end
   end
 
   private
@@ -94,5 +86,20 @@ class OfficesController < ApplicationController
 
   def set_office
     @office = Office.find(params[:id])
+  end
+
+  def get_window(office)
+    marker = office.set_marker
+    marker[:infoWindow] = {
+      content: render_to_string(
+        partial: "/offices/map_window",
+        locals: { office: office }
+      )
+    }
+    marker
+  end
+
+  def set_office_previous_url
+    session[:office_previous_url] = request.referer
   end
 end
