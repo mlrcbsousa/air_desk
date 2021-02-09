@@ -31,7 +31,7 @@ end
 
 # Project specific gems added to the project after the minimal
 gem 'cloudinary', '~> 1.9.1'
-gem 'carrierwave', '~> 1.2'
+gem 'carrierwave', '~> 1.3'
 gem 'devise'
 gem 'json'
 gem 'faker'
